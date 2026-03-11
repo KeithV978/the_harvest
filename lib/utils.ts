@@ -1,7 +1,7 @@
 // lib/utils.ts
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { LeadStatus, SoulState, AgeRange, ChurchMembership } from "@prisma/client";
+import { LeadStatus, SoulState, AgeRange, ChurchMembership } from "@prisma/client"; 
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,10 +11,10 @@ export function getAttendanceStatus(months: number): {
   label: string;
   color: string;
   bg: string;
-} {
-  if (months >= 3) return { label: "Hot 🔥", color: "text-red-700", bg: "bg-red-100" };
-  if (months >= 2) return { label: "Lukewarm 🌡️", color: "text-yellow-700", bg: "bg-yellow-100" };
-  return { label: "Cold ❄️", color: "text-blue-700", bg: "bg-blue-100" };
+} { 
+  if (months >= 3) return { label: "Hot", color: "text-red-700", bg: "bg-red-100" };
+  if (months >= 2) return { label: "Lukewarm", color: "text-yellow-700", bg: "bg-yellow-100" };
+  return { label: "Cold", color: "text-blue-700", bg: "bg-blue-100" };
 }
 
 export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
@@ -24,7 +24,7 @@ export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
 };
 
 export const SOUL_STATE_LABELS: Record<SoulState, string> = {
-  UNBELIEVER: "Unbeliever",
+  NEW_CONVERT: "New Convert",
   UNCHURCHED_BELIEVER: "Un-churched Believer",
   HUNGRY_BELIEVER: "Hungry Believer",
 };
@@ -41,6 +41,7 @@ export const AGE_RANGE_LABELS: Record<AgeRange, string> = {
 export const CHURCH_LABELS: Record<ChurchMembership, string> = {
   TLAC: "TLAC",
   KSOD: "KSOD",
+  BOTH_TLAC_AND_KSOD: "Both TLAC & KSOD",
   OTHERS: "Others",
 };
 
@@ -51,7 +52,7 @@ export const LEAD_STATUS_COLORS: Record<LeadStatus, string> = {
 };
 
 export const SOUL_STATE_COLORS: Record<SoulState, string> = {
-  UNBELIEVER: "#ef4444",
+  NEW_CONVERT: "#ef4444",
   UNCHURCHED_BELIEVER: "#f59e0b",
   HUNGRY_BELIEVER: "#10b981",
 };
