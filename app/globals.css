@@ -107,7 +107,7 @@ body {
 /* Mobile sidebar responsive */
 @media (max-width: 640px) {
   .sidebar-link {
-    @apply justify-center sm:!justify-start px-3;
+    @apply md:justify-center justify-start px-3;
   }
 }
 

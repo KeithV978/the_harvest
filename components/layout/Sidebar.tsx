@@ -76,13 +76,13 @@ export default function Sidebar() {
         <div className="w-full">
           <div className="flex justify-between items-center">
             {/* Close Btn */}
-            <div className="p-4 md:hidden">
-              <button onClick={() => handleNavClick()} className="bg-harvest-400 hover:bg-harvest-500 text-white p-2 rounded-xl">
+            <div className="pb-4 px-4 md:hidden">
+              <button onClick={() => handleNavClick()} className="bg-harvest-400 hover:bg-harvest-500 text-earth-900 p-2 rounded-xl">
                 <CircleX className="" />
               </button>
             </div>
             {/* Logo */}
-            <div className="flex items-center gap-3 px-6 py-5 border-b border-harvest-100">
+            <div className="flex items-center gap-3 px-6 pb-5 border-b border-harvest-100">
               <img
                 src="/applogo.jpg"
                 alt="The Harvest Logo"

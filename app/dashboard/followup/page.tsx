@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import { FileText, Activity, CheckCircle, Clock, Flame } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
+import { useSession } from "next-auth/react";
 
 export default function FollowupDashboardPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+   const { data: session } = useSession();
+     
 
   useEffect(() => {
     fetch("/api/leads?limit=50")
@@ -35,7 +38,7 @@ export default function FollowupDashboardPage() {
     <div className="mt-12">
       <div className="page-header">
         <h1 className="page-title">Follow-Up Dashboard</h1>
-        <p className="page-subtitle">Leads assigned to you by the admin</p>
+        <p className="page-subtitle">Leads assigned to  <strong>{session?.user?.name}</strong> by the admin</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
