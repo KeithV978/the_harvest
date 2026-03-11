@@ -13,7 +13,7 @@ const createLeadSchema = z.object({
   address: z.string().optional(),
   location: z.string().min(1),
   additionalNotes: z.string().optional(),
-  soulState: z.enum(["UNBELIEVER","UNCHURCHED_BELIEVER","HUNGRY_BELIEVER"]),
+  soulState: z.enum(["NEW_CONVERT","UNCHURCHED_BELIEVER","HUNGRY_BELIEVER"]),
 });
 
 export async function GET(req: NextRequest) {
@@ -83,8 +83,10 @@ export async function POST(req: NextRequest) {
     const lead = await prisma.lead.create({
       data: {
         ...data,
-        addedById: user.id,
         status: LeadStatus.NEW_LEAD,
+        addedBy: {
+          connect: { id: user.id },
+        },
       },
       include: {
         addedBy: { select: { id: true, name: true } },
