@@ -1,16 +1,19 @@
 // lib/email.ts
 import nodemailer from "nodemailer";
+ 
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
-const transporter = nodemailer.createTransport({
+const transportOptions: SMTPTransport.Options = {
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT ?? 587),
-  secure: "true", // true for port 465
+  secure: process.env.SMTP_PORT === "465", // boolean, true only for port 465
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-});
+};
 
+const transporter = nodemailer.createTransport(transportOptions);
 export async function sendPasswordResetEmail(to: string, name: string, resetUrl: string) {
   const mailOptions = {
     from: `"The Harvest" <${process.env.SMTP_FROM ?? process.env.SMTP_USER}>`,
