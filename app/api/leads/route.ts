@@ -34,9 +34,12 @@ export async function GET(req: NextRequest) {
   const where: any = {};
 
   if (user.role === "FOLLOWUP") {
-    where.assignedToId = user.id;
-  }
+  where.assignedToId = user.id;
+}
 
+if (user.role === "EVANGELIST") {
+  where.addedById = user.id;
+}
   if (dateFrom || dateTo) {
     where.createdAt = {};
     if (dateFrom) where.createdAt.gte = new Date(dateFrom);
