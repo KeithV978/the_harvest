@@ -50,15 +50,15 @@ export default function AdminLeadsPage() {
 
       <div className="harvest-card overflow-hidden">
         {/* Filters bar */}
-        <div className="flex flex-col gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100 bg-harvest-50/50">
+        <div className="flex flex-col gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100 bg-white ">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" />
+            {/* <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" /> */}
             <input
               type="text"
               placeholder="Search leads..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="harvest-input pl-9 text-xs py-2 w-full"
+              className="harvest-input pl-12 text-xs py-2 w-full"
             />
           </div>
 

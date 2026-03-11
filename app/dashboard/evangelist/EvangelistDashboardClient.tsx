@@ -31,7 +31,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
 
   return (
     <div>
-      <div className="page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+      <div className="pt-6 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="page-title">Welcome back, {userName.split(" ")[0]} 👋</h1>
           <p className="page-subtitle">Here's a summary of your harvest work</p>

@@ -1,7 +1,7 @@
 // app/dashboard/followup/page.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { FileText, Activity, CheckCircle, Clock } from "lucide-react";
+import { FileText, Activity, CheckCircle, Clock, Flame } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 
 export default function FollowupDashboardPage() {
@@ -25,15 +25,15 @@ export default function FollowupDashboardPage() {
   };
 
   const statCards = [
-    { label: "Assigned Leads", value: stats.total, icon: FileText, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
-    { label: "Following Up", value: stats.followingUp, icon: Activity, color: "bg-blue-50 text-blue-600", border: "border-blue-200" },
-    { label: "Converted", value: stats.converted, icon: CheckCircle, color: "bg-green-50 text-green-600", border: "border-green-200" },
-    { label: "Hot Leads 🔥", value: stats.hot, icon: Clock, color: "bg-red-50 text-red-600", border: "border-red-200" },
+    { label: "Assigned Leads", icon: FileText, value: stats.total, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
+    { label: "Following Up", icon: Activity, value: stats.followingUp, color: "bg-blue-50 text-blue-600", border: "border-blue-200" },
+    { label: "Converted", icon: CheckCircle, value: stats.converted, color: "bg-green-50 text-green-600", border: "border-green-200" },
+    { label: "Hot Leads", icon: Flame, value: stats.hot, color: "bg-red-50 text-red-600", border: "border-red-200" },
   ];
 
   return (
     <div>
-      <div className="page-header">
+      <div className="pt-6 page-header">
         <h1 className="page-title">Follow-Up Dashboard</h1>
         <p className="page-subtitle">Leads assigned to you by the admin</p>
       </div>
@@ -45,7 +45,8 @@ export default function FollowupDashboardPage() {
               <card.icon className="w-5 h-5" />
             </div>
             <div className="text-2xl font-bold font-display text-earth-900">{card.value}</div>
-            <div className="text-sm text-earth-500 mt-0.5">{card.label}</div>
+            <div className="text-sm text-earth-500 mt-0.5"> 
+              {card.label}</div>
           </div>
         ))}
       </div>

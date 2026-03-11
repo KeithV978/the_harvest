@@ -58,14 +58,14 @@ export default function AdminDashboardPage() {
   })) ?? [];
 
   const attendanceData = stats ? [
-    { name: "Cold ❄️", value: stats.attendance?.cold ?? 0, fill: ATTENDANCE_COLORS.cold },
-    { name: "Lukewarm 🌡️", value: stats.attendance?.lukewarm ?? 0, fill: ATTENDANCE_COLORS.lukewarm },
-    { name: "Hot 🔥", value: stats.attendance?.hot ?? 0, fill: ATTENDANCE_COLORS.hot },
+    { name: "Cold", icon: Snowflake, value: stats.attendance?.cold ?? 0, fill: ATTENDANCE_COLORS.cold },
+    { name: "Lukewarm", icon: Thermometer, value: stats.attendance?.lukewarm ?? 0, fill: ATTENDANCE_COLORS.lukewarm },
+    { name: "Hot ", icon: Flame , value: stats.attendance?.hot ?? 0, fill: ATTENDANCE_COLORS.hot },
   ] : [];
 
   return (
     <div>
-      <div className="pt-6-page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+      <div className="pt-6 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
           <h1 className="page-title">Admin Dashboard</h1>
           <p className="page-subtitle">Overview of the harvest field</p>
@@ -97,12 +97,12 @@ export default function AdminDashboardPage() {
           {/* KPI Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
             {[
-              { label: "Total Leads", value: stats?.totalLeads ?? 0, icon: FileText, bg: "bg-harvest-50", text: "text-harvest-600", border: "border-harvest-200" },
-              { label: "Evangelists", value: stats?.evangelists ?? 0, icon: Users, bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-200" },
-              { label: "Follow-Up", value: stats?.followups ?? 0, icon: UserCheck, bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
-              { label: "Cold Leads ❄️", value: stats?.attendance?.cold ?? 0, icon: Snowflake, bg: "bg-sky-50", text: "text-sky-600", border: "border-sky-200" },
-              { label: "Lukewarm 🌡️", value: stats?.attendance?.lukewarm ?? 0, icon: Thermometer, bg: "bg-yellow-50", text: "text-yellow-600", border: "border-yellow-200" },
-              { label: "Hot Leads 🔥", value: stats?.attendance?.hot ?? 0, icon: Flame, bg: "bg-red-50", text: "text-red-600", border: "border-red-200" },
+              { label: "Total Leads", icon: FileText, value: stats?.totalLeads ?? 0, bg: "bg-harvest-50", text: "text-harvest-600", border: "border-harvest-200" },
+              { label: "Evangelists", icon: Users, value: stats?.evangelists ?? 0, bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-200" },
+              { label: "Follow-Up", icon: UserCheck, value: stats?.followups ?? 0, bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
+              { label: "Cold Leads", icon: Snowflake, value: stats?.attendance?.cold ?? 0, bg: "bg-sky-50", text: "text-sky-600", border: "border-sky-200" },
+              { label: "Lukewarm", icon: Thermometer, value: stats?.attendance?.lukewarm ?? 0, bg: "bg-yellow-50", text: "text-yellow-600", border: "border-yellow-200" },
+              { label: "Hot Leads", icon: Flame, value: stats?.attendance?.hot ?? 0, bg: "bg-red-50", text: "text-red-600", border: "border-red-200" },
             ].map(card => (
               <div key={card.label} className={`harvest-card p-4 border ${card.border}`}>
                 <div className={`inline-flex p-2 rounded-xl ${card.bg} ${card.text} mb-2`}>
