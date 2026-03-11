@@ -34,27 +34,32 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900 p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="text-center mb-8">
-            <h1 className="font-display text-3xl font-bold text-white mb-4">Welcome</h1>
-          <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
-            
-            <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
-          </div>
-          <p className="text-harvest-300 text-sm mt-1">Sign in to your account</p>
-        </div>
+        <div
+          className="absolute top-0 left-0 w-full h-full opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle at 30% 60%, #ff9d37 0%, transparent 50%),
+                              radial-gradient(circle at 75% 25%, #ffc070 0%, transparent 40%)`,
+          }}
+        />
       </div>
 
       <div className="w-full max-w-md relative">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-harvest-500 shadow-lg mb-4">
-            <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
+            {/* <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity="0.9"/>
               <path d="M20 10C20 10 14 16 14 22C14 25.314 16.686 28 20 28C23.314 28 26 25.314 26 22C26 16 20 10 20 10Z" fill="white" opacity="0.3"/>
               <path d="M20 34V38M17 36H23" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            </svg> */}
           </div>
-          <h1 className="font-display text-3xl font-bold text-white">The Harvest</h1>
+          <div className="text-center mb-8"> 
+          <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
+            
+            <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
+          </div>
+          <p className="text-harvest-300 text-sm mt-1">Sign in to your account</p>
+        </div>
           <p className="text-harvest-300 text-sm mt-1">Password Recovery</p>
         </div>
 
