@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Plus, TrendingUp, Users, Activity, CheckCircle } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 import AddLeadModal from "@/components/leads/AddLeadModal";
-import { LEAD_STATUS_LABELS, SOUL_STATE_LABELS, AGE_RANGE_LABELS } from "@/lib/utils";
 
 interface Props {
   leads: any[];
@@ -33,7 +32,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
     <div>
       <div className="pt-6 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
-          <h1 className="page-title">Welcome back, {userName.split(" ")[0]} 👋</h1>
+          <h1 className="page-title">Welcome Harvester, {userName.split(" ")[0]} 👋</h1>
           <p className="page-subtitle">Here's a summary of your harvest work</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="harvest-btn-primary w-full sm:w-auto">
@@ -42,7 +41,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(card => (
           <div key={card.label} className={`harvest-card p-5 border ${card.border}`}>
             <div className={`inline-flex p-2 rounded-xl ${card.color} mb-3`}>

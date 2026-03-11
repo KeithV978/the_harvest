@@ -1,10 +1,9 @@
-// components/leads/LeadTable.tsx
 "use client";
 import { useState } from "react";
 import { Eye } from "lucide-react";
 import { LEAD_STATUS_LABELS, SOUL_STATE_LABELS, AGE_RANGE_LABELS, getAttendanceStatus, cn } from "@/lib/utils";
 import { format } from "date-fns";
-import LeadDetailModal from "./LeadDetailModal";
+import LeadDetailModal from "./LeadDetailModal"; 
 
 interface Props {
   leads: any[];

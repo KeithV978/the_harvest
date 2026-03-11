@@ -40,10 +40,10 @@ const followupNav: NavItem[] = [
 const adminNav: NavItem[] = [
   { href: "/dashboard/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/admin/leads", label: "All Leads", icon: FileText },
-  { href: "/dashboard/admin/evangelists", label: "Evangelists", icon: Users },
+  { href: "/dashboard/admin/evangelists", label: "All Evangelists", icon: Users },
   {
     href: "/dashboard/admin/followups",
-    label: "Follow-Up Team",
+    label: "All Follow-Up Team",
     icon: UserCheck,
   },
 ];
@@ -147,7 +147,7 @@ export default function Sidebar() {
             </div>
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="p-1.5 rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all"
+              className="p-1.5 rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
               title="Sign out"
             >
               <LogOut className="w-4 h-4" />
@@ -183,11 +183,11 @@ export default function Sidebar() {
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
+          "lg:hidden fixed top-0 left-0 z-40 w-64 h-[100%] bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="h-[100%]">{sidebarContent}</div>
+        <div className="h-full">{sidebarContent}</div>
       </aside>
     </>
   );

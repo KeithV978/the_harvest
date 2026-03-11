@@ -46,7 +46,7 @@ export default function EvangelistLeadsPage() {
       <div className="harvest-card overflow-hidden">
         <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" />
+            {/* <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" /> */}
             <input
               type="text"
               placeholder="Search by name or location..."

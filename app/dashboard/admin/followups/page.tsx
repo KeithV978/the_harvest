@@ -2,6 +2,7 @@
 "use client";
 import { useState, useEffect } from "react"; 
 import { UserCheck } from "lucide-react";
+import FollowupTable from "@/components/followupTable/FollowupTable";
 
 export default function FollowupsPage() {
   const [users, setUsers] = useState<any[]>([]);
@@ -23,7 +24,7 @@ export default function FollowupsPage() {
   const totalPages = Math.ceil(total / 15);
 
   return (
-    <div>
+    <div className="py-16">
       <div className="page-header">
         <h1 className="page-title">Follow-Up Team</h1>
         <p className="page-subtitle">{total} follow-up members registered</p>
@@ -39,7 +40,7 @@ export default function FollowupsPage() {
           </div>
         ) : (
           <div className="w-full overflow-x-auto -mx-2 px-2 lg:mx-0 lg:px-0">
-        
+         <FollowupTable followups={users} />
           </div>
         )}
 

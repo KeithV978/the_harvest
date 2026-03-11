@@ -32,13 +32,13 @@ export default function FollowupDashboardPage() {
   ];
 
   return (
-    <div>
-      <div className="pt-6 page-header">
+    <div className="mt-12">
+      <div className="page-header">
         <h1 className="page-title">Follow-Up Dashboard</h1>
         <p className="page-subtitle">Leads assigned to you by the admin</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(card => (
           <div key={card.label} className={`harvest-card p-5 border ${card.border}`}>
             <div className={`inline-flex p-2 rounded-xl ${card.color} mb-3`}>

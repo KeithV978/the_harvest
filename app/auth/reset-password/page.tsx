@@ -82,13 +82,14 @@ const PasswordResetForm = () =>{
    return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900 p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute top-0 left-0 w-full h-full opacity-5"
-          style={{
-            backgroundImage: `radial-gradient(circle at 60% 40%, #ff9d37 0%, transparent 50%),
-                              radial-gradient(circle at 20% 70%, #ffc070 0%, transparent 40%)`,
-          }}
-        />
+         <div className="text-center mb-8">
+            <h1 className="font-display text-3xl font-bold text-white mb-4">Welcome</h1>
+          <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
+            
+            <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
+          </div>
+          <p className="text-harvest-300 text-sm mt-1">Sign in to your account</p>
+        </div>
       </div>
 
       <div className="w-full max-w-md relative">

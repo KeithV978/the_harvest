@@ -42,7 +42,7 @@ export default function AdminLeadsPage() {
   const totalPages = Math.ceil(total / 15);
 
   return (
-    <div>
+    <div className="py-16">
       <div className="page-header">
         <h1 className="page-title">All Leads</h1>
         <p className="page-subtitle">{total} total leads in the system</p>
