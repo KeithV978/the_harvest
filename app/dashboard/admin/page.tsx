@@ -5,7 +5,7 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip,
   ResponsiveContainer, Legend
 } from "recharts";
-import { Users, FileText, UserCheck, TrendingUp, Flame, Snowflake, Thermometer } from "lucide-react";
+import { Users, FileText, UserCheck, TrendingUp, Flame, Snowflake, Thermometer, ChevronDown, ChevronRight } from "lucide-react";
 import { LEAD_STATUS_LABELS, SOUL_STATE_LABELS, CHURCH_LABELS, LEAD_STATUS_COLORS, SOUL_STATE_COLORS } from "@/lib/utils";
 
 const ATTENDANCE_COLORS = { cold: "#93c5fd", lukewarm: "#fcd34d", hot: "#f87171" };
@@ -15,6 +15,7 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const fetchStats = async () => {
     setLoading(true);
@@ -72,7 +73,13 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Date filter */}
-        <form onSubmit={handleFilter} className="flex flex-col sm:flex-row sm:items-end gap-2 w-full sm:w-auto">
+      <div>
+          <div className="w-full mb-2 bg-earth-700 rounded-xl">
+            <button onClick={() => setIsFilterOpen(prev => !prev)} className="w-full flex justify-between text-harvest-300 bg-earth-700 py-2 px-4 rounded-xl">
+              Date Filter {isFilterOpen ?  <ChevronDown /> : <ChevronRight />} </button>
+          </div>
+
+          <form onSubmit={handleFilter} className={`flex flex-col sm:flex-row sm:items-end gap-2 w-full sm:w-auto ${isFilterOpen ? "block" : "hidden"}`}>
           <div>
             <label className="text-xs text-earth-500 block mb-1">From</label>
             <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="harvest-input text-xs py-2 w-full sm:w-36" />
@@ -82,12 +89,13 @@ export default function AdminDashboardPage() {
             <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="harvest-input text-xs py-2 w-full sm:w-36" />
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
-            <button type="submit" className="harvest-btn-primary text-xs py-2 flex-1 sm:flex-none">Filter</button>
+            <button type="submit" className="harvest-btn-primary text-center text-xs py-2 flex-1 sm:flex-none">Filter</button>
             {(dateFrom || dateTo) && (
               <button type="button" onClick={handleClear} className="harvest-btn-secondary text-xs py-2 flex-1 sm:flex-none">Clear</button>
             )}
           </div>
         </form>
+      </div>
       </div>
 
       {loading ? (
@@ -95,7 +103,7 @@ export default function AdminDashboardPage() {
       ) : (
         <>
           {/* KPI Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
             {[
               { label: "Total Leads", icon: FileText, value: stats?.totalLeads ?? 0, bg: "bg-harvest-50", text: "text-harvest-600", border: "border-harvest-200" },
               { label: "Evangelists", icon: Users, value: stats?.evangelists ?? 0, bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-200" },
