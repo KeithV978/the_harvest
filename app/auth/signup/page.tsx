@@ -53,7 +53,7 @@ export default function SignupPage() {
             </svg> */}
           {/* </div> */}
 
-        <div className="text-center mb-8">
+        <div className="text-center mt-8  mb-4">
             {/* <h1 className="font-display text-3xl font-bold text-white mb-4">Get Started</h1> */}
           <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
             
