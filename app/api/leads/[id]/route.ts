@@ -1,0 +1,96 @@
+// app/api/leads/[id]/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { LeadStatus } from "@prisma/client";
+
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const user = session.user as any;
+  const lead = await prisma.lead.findUnique({
+    where: { id: params.id },
+    include: {
+      addedBy: { select: { id: true, name: true, email: true } },
+      assignedTo: { select: { id: true, name: true, email: true } },
+      notes: {
+        include: { user: { select: { id: true, name: true } } },
+        orderBy: { createdAt: "asc" },
+      },
+    },
+  });
+
+  if (!lead) return NextResponse.json({ error: "Not found" }, { status: 404 });
+
+  if (user.role === "FOLLOWUP" && lead.assignedToId !== user.id) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  return NextResponse.json(lead);
+}
+
+export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const user = session.user as any;
+  const lead = await prisma.lead.findUnique({ where: { id: params.id } });
+  if (!lead) return NextResponse.json({ error: "Not found" }, { status: 404 });
+
+  if (user.role === "FOLLOWUP" && lead.assignedToId !== user.id) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const body = await req.json();
+
+  // FOLLOWUP can only update church-related fields and notes
+  let updateData: any;
+  if (user.role === "FOLLOWUP") {
+    updateData = {
+      churchMembership: body.churchMembership,
+      churchName: body.churchName,
+      monthsConsistent: body.monthsConsistent,
+    };
+    // Remove undefined keys
+    Object.keys(updateData).forEach(k => updateData[k] === undefined && delete updateData[k]);
+  } else {
+    updateData = { ...body };
+    delete updateData.id;
+    delete updateData.addedById;
+  }
+
+  // If admin assigns someone, update status to FOLLOWING_UP
+  if (body.assignedToId && lead.assignedToId !== body.assignedToId) {
+    updateData.status = LeadStatus.FOLLOWING_UP;
+  }
+
+  const updated = await prisma.lead.update({
+    where: { id: params.id },
+    data: updateData,
+    include: {
+      addedBy: { select: { id: true, name: true } },
+      assignedTo: { select: { id: true, name: true } },
+      notes: {
+        include: { user: { select: { id: true, name: true } } },
+        orderBy: { createdAt: "asc" },
+      },
+    },
+  });
+
+  return NextResponse.json(updated);
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const user = session.user as any;
+  if (user.role !== "ADMIN") {
+    return NextResponse.json({ error: "Only admins can delete leads" }, { status: 403 });
+  }
+
+  await prisma.lead.delete({ where: { id: params.id } });
+  return NextResponse.json({ success: true });
+}

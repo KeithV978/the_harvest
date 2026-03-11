@@ -1,0 +1,101 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  EVANGELIST
+  FOLLOWUP
+  ADMIN
+}
+
+enum SoulState {
+  NEW_CONVERT
+  UNCHURCHED_BELIEVER
+  HUNGRY_BELIEVER
+}
+
+enum LeadStatus {
+  NEW_LEAD
+  FOLLOWING_UP
+  CONVERTED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum AgeRange {
+  UNDER_18
+  AGE_18_25
+  AGE_26_35
+  AGE_36_45
+  AGE_46_60
+  ABOVE_60
+}
+
+enum ChurchMembership {
+  TLAC
+  KSOD
+  BOTH_TLAC_AND_KSOD
+  OTHERS
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  role          Role      @default(EVANGELIST)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  addedLeads    Lead[]    @relation("AddedBy")
+  assignedLeads Lead[]    @relation("AssignedTo")
+  notes         Note[]
+}
+
+model Lead {
+  id              String            @id @default(cuid())
+  fullName        String
+  ageRange        AgeRange
+  phone           String?
+  address         String?
+  location        String
+  additionalNotes String?
+  gender          Gender              @default(MALE)
+  soulState       SoulState
+  status          LeadStatus        @default(NEW_LEAD)
+
+  // Church follow-up fields
+  churchMembership  ChurchMembership?
+  churchName        String?           // required if OTHERS
+  monthsConsistent  Int               @default(0)
+
+  addedById       String
+  addedBy         User              @relation("AddedBy", fields: [addedById], references: [id])
+
+  assignedToId    String?
+  assignedTo      User?             @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  notes           Note[]
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  content   String
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,172 @@
+// app/auth/signup/page.tsx
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { User, Mail, Lock, LogIn, AlertCircle, Zap, HeartHandshake } from "lucide-react";
+
+export default function SignupPage() {
+  const router = useRouter();
+  const [form, setForm] = useState({ name: "", email: "", password: "", role: "EVANGELIST" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+    setLoading(false);
+
+    if (!res.ok) {
+      setError(data.error || "Something went wrong");
+    } else {
+      router.push("/auth/login?registered=1");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900 p-4">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle at 70% 70%, #ff9d37 0%, transparent 50%),
+                              radial-gradient(circle at 20% 30%, #ffc070 0%, transparent 40%)`,
+          }}
+        />
+      </div>
+
+      <div className="w-full max-w-md relative">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-harvest-500 shadow-lg mb-4">
+            <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity="0.9"/>
+              <path d="M20 10C20 10 14 16 14 22C14 25.314 16.686 28 20 28C23.314 28 26 25.314 26 22C26 16 20 10 20 10Z" fill="white" opacity="0.3"/>
+              <path d="M20 34V38M17 36H23" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </div>
+          <h1 className="font-display text-3xl font-bold text-white">The Harvest</h1>
+          <p className="text-harvest-300 text-sm mt-1">Create your account</p>
+        </div>
+
+        <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+                Full Name
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <input
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                  placeholder="John Doe"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  placeholder="you@example.com"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={form.password}
+                  onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+                  placeholder="Min. 6 characters"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+                Role
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { value: "EVANGELIST", label: "Evangelist", desc: "Add new leads", icon: Zap },
+                  { value: "FOLLOWUP", label: "Follow-Up", desc: "Disciple leads", icon: HeartHandshake },
+                ].map(opt => {
+                  const RoleIcon = opt.icon;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setForm(f => ({ ...f, role: opt.value }))}
+                      className={`rounded-xl p-3 text-left border transition-all flex items-start gap-2 ${
+                        form.role === opt.value
+                          ? "bg-harvest-500/30 border-harvest-400 text-white"
+                          : "bg-white/5 border-white/10 text-harvest-300 hover:bg-white/10"
+                      }`}
+                    >
+                      <RoleIcon className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="font-semibold text-sm">{opt.label}</div>
+                        <div className="text-xs opacity-70 mt-0.5">{opt.desc}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {error && (
+              <div className="bg-red-500/20 border border-red-400/30 rounded-xl px-4 py-3 flex items-center gap-2 text-red-300 text-sm">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-harvest-500 hover:bg-harvest-400 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-lg shadow-harvest-500/30 flex items-center justify-center gap-2"
+            >
+              <LogIn className="w-4 h-4" />
+              {loading ? "Creating account..." : "Create Account"}
+            </button>
+          </form>
+
+          <p className="text-center text-harvest-300 text-sm mt-6">
+            Already have an account?{" "}
+            <Link href="/auth/login" className="text-harvest-400 hover:text-harvest-300 font-semibold underline underline-offset-2">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
