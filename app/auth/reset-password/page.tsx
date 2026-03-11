@@ -1,12 +1,27 @@
 // app/auth/reset-password/page.tsx
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Eye, EyeOff, CheckCircle, XCircle, Lock } from "lucide-react";
 
 export default function ResetPasswordPage() {
-  const router = useRouter();
+ 
+return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900">
+        <div className="text-harvest-300 text-sm">Loading...</div>
+      </div>
+    }>
+      <PasswordResetForm />
+    </Suspense>
+  );
+ 
+}
+
+
+const PasswordResetForm = () =>{
+   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -64,8 +79,7 @@ export default function ResetPasswordPage() {
       setTimeout(() => router.push("/auth/login"), 3000);
     }
   };
-
-  return (
+   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900 p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
@@ -223,5 +237,5 @@ export default function ResetPasswordPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
