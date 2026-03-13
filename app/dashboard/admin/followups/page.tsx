@@ -24,7 +24,7 @@ export default function FollowupsPage() {
   const totalPages = Math.ceil(total / 15);
 
   return (
-    <div className="py-16">
+    <div className="py-8">
       <div className="page-header">
         <h1 className="page-title">Follow-Up Team</h1>
         <p className="page-subtitle">{total} follow-up members registered</p>

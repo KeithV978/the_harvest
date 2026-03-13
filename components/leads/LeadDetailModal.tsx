@@ -1,7 +1,7 @@
 // components/leads/LeadDetailModal.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { X, Trash2, Edit2, Send, Check, ChevronDown, AlertCircle } from "lucide-react";
+import { X, Trash2, Edit2, Send, Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import {
   LEAD_STATUS_LABELS, SOUL_STATE_LABELS, AGE_RANGE_LABELS,
@@ -12,7 +12,7 @@ import { format } from "date-fns";
 const AGE_RANGES = ["UNDER_18","AGE_18_25","AGE_26_35","AGE_36_45","AGE_46_60","ABOVE_60"];
 const SOUL_STATES = ["UNBELIEVER","UNCHURCHED_BELIEVER","HUNGRY_BELIEVER"];
 const STATUSES = ["NEW_LEAD","FOLLOWING_UP","CONVERTED"];
-const CHURCHES = ["TLAC","KSOD","OTHERS"];
+const CHURCHES = ["TLAC","KSOD", "BOTH_TLAC_AND_KSOD","OTHERS"];
 
 export default function LeadDetailModal({
   lead: initialLead,
@@ -192,7 +192,7 @@ export default function LeadDetailModal({
 
                 {lead.additionalNotes && (
                   <div className="sm:col-span-2">
-                    <div className="text-xs font-semibold uppercase tracking-wider text-earth-400">Additional Notes</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-earth-400">Notes From Evangelist</div>
                     <div className="text-xs sm:text-sm text-earth-700 mt-1 bg-harvest-50 rounded-xl p-2 sm:p-3">{lead.additionalNotes}</div>
                   </div>
                 )}
@@ -255,7 +255,7 @@ export default function LeadDetailModal({
                         <input value={editForm.address} onChange={e => setEditForm((f: any) => ({...f, address: e.target.value}))} className="harvest-input" />
                       </div>
                       <div className="col-span-2">
-                        <label className="harvest-label">Additional Notes</label>
+                        <label className="harvest-label">Notes From Evangelist</label>
                         <textarea rows={2} value={editForm.additionalNotes} onChange={e => setEditForm((f: any) => ({...f, additionalNotes: e.target.value}))} className="harvest-input resize-none" />
                       </div>
                     </div>
@@ -316,7 +316,7 @@ export default function LeadDetailModal({
 
           {/* Right: Notes */}
           <div className="md:col-span-1 space-y-3 sm:space-y-4">
-            <h3 className="font-semibold text-earth-900 text-sm">Notes & Updates</h3>
+            <h3 className="font-semibold text-earth-900 text-sm">Followup Notes & Updates</h3>
             <div className="space-y-2 max-h-48 sm:max-h-64 overflow-y-auto">
               {(lead.notes ?? []).length === 0 && (
                 <p className="text-xs text-earth-400 italic">No notes yet.</p>

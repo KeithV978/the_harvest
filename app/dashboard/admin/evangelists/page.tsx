@@ -24,7 +24,7 @@ export default function EvangelistsPage() {
   const totalPages = Math.ceil(total / 15);
 
   return (
-    <div className="py-16">
+    <div className="py-8">
       <div className="page-header">
         <h1 className="page-title">Evangelists</h1>
         <p className="page-subtitle">{total} evangelists registered</p>

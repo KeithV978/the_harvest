@@ -38,7 +38,7 @@ export default function AddLeadModal({
     gender: "",
     location: "",
     additionalNotes: "",
-    soulState: "NEW_CONVERT",
+    soulState: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -190,7 +190,7 @@ export default function AddLeadModal({
             </div>
 
             <div className="col-span-2">
-              <label className="harvest-label">Additional Notes</label>
+              <label className="harvest-label">Notes From Evangelist</label>
               <textarea
                 rows={3}
                 value={form.additionalNotes}
