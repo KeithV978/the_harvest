@@ -78,22 +78,13 @@ export default function Sidebar() {
   const sidebarContent = (
     <div className="flex justify-between h-full flex-col items-center border-b border-harvest-100">
       <div className="w-full">
-        <div className="flex justify-between items-center">
-          {/* Close Btn */}
-          <div className="pb-4 px-4 md:hidden">
-            <button
-              onClick={() => handleNavClick()}
-              className="bg-harvest-400 hover:bg-harvest-500 text-earth-900 p-2 rounded-xl"
-            >
-              <CircleX className="" />
-            </button>
-          </div>
-          {/* Logo */}
+        <div className="flex justify-between mt-4 items-center">
+           {/* Logo */}
           <div className="flex items-center gap-3 px-6 pb-5 border-b border-harvest-100">
             <img
               src="/applogo.jpg"
               alt="The Harvest Logo"
-              className="w-auto h-20"
+              className="w-auto h-14"
             />
             <div className="hidden sm:block">
               <h1 className="font-display font-bold text-earth-900 text-lg leading-tight">
@@ -101,6 +92,18 @@ export default function Sidebar() {
               </h1>
             </div>
           </div>
+
+
+          {/* Close Btn */}
+          <div className="pb-4 px-4 md:hidden">
+            <button
+              onClick={() => handleNavClick()}
+              className="bg-harvest-400 text-earth-700  p-2 rounded-xl"
+            >
+              <CircleX className="" />
+            </button>
+          </div>
+        
         </div>
 
         {/* Nav */}
@@ -134,11 +137,11 @@ export default function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="p-4 border-t border-harvest-100">
-        <div>
+      <div className="w-full p-4 border-t border-harvest-100">
+        {/* <div> */}
 
           {/* 1 */}
-        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl group">
           <div className="w-8 h-8 rounded-full bg-harvest-200 flex items-center justify-center text-harvest-700 font-bold text-sm flex-shrink-0">
             {session?.user?.name?.[0]?.toUpperCase() ?? "U"}
           </div>
@@ -164,16 +167,16 @@ export default function Sidebar() {
         </div>
 
 
-        </div>
+        {/* </div> */}
         {/* 2 */}
-         <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
+         <div className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
           <div className="flex-1 min-w-0 sm:block">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
               className="p-1.5 rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
               title="Sign out"
             >
-               Signout
+               Log Out
             </button>
           </div>
           <LogOut className="w-4 h-4" />
