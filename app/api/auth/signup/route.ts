@@ -9,6 +9,8 @@ const signupSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   password: z.string().min(6),
+  phone: z.string().optional(),
+  gender: z.enum(["MALE", "FEMALE"]),
   role: z.enum(["EVANGELIST", "FOLLOWUP"]),
 });
 
@@ -28,6 +30,8 @@ export async function POST(req: NextRequest) {
         name: data.name,
         email: data.email,
         password: hashed,
+        gender: data.gender,
+        phone: data.phone || null,
         role: data.role as Role,
       },
     });

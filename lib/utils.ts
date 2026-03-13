@@ -12,7 +12,7 @@ export function getAttendanceStatus(months: number): {
   color: string;
   bg: string;
 } { 
-  if (months >= 3) return { label: "Hot", color: "text-red-700", bg: "bg-red-100" };
+  if (months >= 3) return { label: "Hot", color: "text-white", bg: "bg-red-400" };
   if (months >= 2) return { label: "Lukewarm", color: "text-yellow-700", bg: "bg-yellow-100" };
   return { label: "Cold", color: "text-blue-700", bg: "bg-blue-100" };
 }

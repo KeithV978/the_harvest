@@ -48,7 +48,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md relative">
         {/* Logo / Header */}
         <div className="text-center mb-8">
-            <h1 className="font-display text-3xl font-bold text-white mb-4">Welcome Back</h1>
+            {/* <h1 className="font-display text-3xl font-bold text-white mb-4">Welcome Back</h1> */}
           <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
             {/* <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity="0.9"/>

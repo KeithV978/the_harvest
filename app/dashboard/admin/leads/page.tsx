@@ -55,10 +55,10 @@ export default function AdminLeadsPage() {
       <div className="harvest-card overflow-hidden">
         {/* Filters bar */}
         <div>
-          <div className="w-full mb-2 bg-earth-700 rounded-xl">
+          <div className="w-full mb-2 bg-harvest-800 rounded-xl">
             <button
               onClick={() => setIsFilterOpen((prev) => !prev)}
-              className="w-full flex justify-between text-harvest-300 bg-earth-700 py-2 px-4 rounded-xl"
+              className={`w-full flex sm:justify-between md:justify-start text-white bg-harvest-900 py-2 px-4 rounded-xl `}
             >
               Filters{" "}
               {isFilterOpen ? <ChevronDown /> : <ChevronRight />}{" "}
@@ -150,7 +150,7 @@ export default function AdminLeadsPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-earth-400">
+          <div className="py-16 text-center text-slate-400">
             Loading leads...
           </div>
         ) : (
@@ -173,7 +173,7 @@ export default function AdminLeadsPage() {
 
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4 border-t border-harvest-100">
-            <span className="text-xs sm:text-sm text-earth-500 order-2 sm:order-1">
+            <span className="text-xs sm:text-sm text-slate-500 order-2 sm:order-1">
               Showing {(page - 1) * 15 + 1}–{Math.min(page * 15, total)} of{" "}
               {total}
             </span>
@@ -192,7 +192,7 @@ export default function AdminLeadsPage() {
                     <button
                       key={p}
                       onClick={() => setPage(p)}
-                      className={`w-8 h-8 flex-shrink-0 rounded-lg text-xs font-medium transition-all ${p === page ? "bg-harvest-500 text-white" : "bg-harvest-50 text-earth-600 hover:bg-harvest-100"}`}
+                      className={`w-8 h-8 flex-shrink-0 rounded-lg text-xs font-medium transition-all ${p === page ? "bg-harvest-500 text-white" : "bg-harvest-50 text-slate-600 hover:bg-harvest-100"}`}
                     >
                       {p}
                     </button>

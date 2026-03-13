@@ -51,7 +51,7 @@ export default function FollowupLeadsPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-earth-400">Loading...</div>
+          <div className="py-16 text-center text-slate-400">Loading...</div>
         ) : (
           <LeadTable
             leads={filtered}
@@ -63,7 +63,7 @@ export default function FollowupLeadsPage() {
 
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-6 py-4 border-t border-harvest-100">
-            <span className="text-sm text-earth-500">Page {page} of {totalPages}</span>
+            <span className="text-sm text-slate-500">Page {page} of {totalPages}</span>
             <div className="flex gap-2">
               <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">← Prev</button>
               <button disabled={page === totalPages} onClick={() => setPage(p => p + 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">Next →</button>

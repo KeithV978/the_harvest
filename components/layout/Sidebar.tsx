@@ -15,6 +15,10 @@ import {
   Menu,
   X,
   CircleX,
+  Settings,
+  Megaphone,
+  User,
+  MessageSquare,
 } from "lucide-react";
 
 interface NavItem {
@@ -26,6 +30,7 @@ interface NavItem {
 const evangelistNav: NavItem[] = [
   { href: "/dashboard/evangelist", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/evangelist/leads", label: "My Leads", icon: FileText },
+  { href: "/dashboard/evangelist/profile", label: "Profile", icon: User },
 ];
 
 const followupNav: NavItem[] = [
@@ -35,6 +40,7 @@ const followupNav: NavItem[] = [
     label: "Assigned Leads",
     icon: FileText,
   },
+  { href: "/dashboard/followup/profile", label: "Profile", icon: User },
 ];
 
 const adminNav: NavItem[] = [
@@ -49,6 +55,21 @@ const adminNav: NavItem[] = [
     href: "/dashboard/admin/followups",
     label: "All Follow-Up Team",
     icon: UserCheck,
+  },
+  {
+    href: "/dashboard/admin/announcements",
+    label: "Announcements",
+    icon: Megaphone,
+  },
+  {
+    href: "/dashboard/admin/sms-settings",
+    label: "SMS Settings",
+    icon: Settings,
+  },
+  {
+    href: "/dashboard/admin/sms-logs",
+    label: "SMS Logs",
+    icon: MessageSquare,
   },
 ];
 
@@ -79,7 +100,7 @@ export default function Sidebar() {
     <div className="flex justify-between h-full flex-col items-center border-b border-harvest-100">
       <div className="w-full">
         <div className="flex justify-between mt-4 items-center">
-           {/* Logo */}
+          {/* Logo */}
           <div className="flex items-center gap-3 px-6 pb-5 border-b border-harvest-100">
             <img
               src="/applogo.jpg"
@@ -93,7 +114,6 @@ export default function Sidebar() {
             </div>
           </div>
 
-
           {/* Close Btn */}
           <div className="pb-4 px-4 md:hidden">
             <button
@@ -103,7 +123,6 @@ export default function Sidebar() {
               <CircleX className="" />
             </button>
           </div>
-        
         </div>
 
         {/* Nav */}
@@ -140,13 +159,13 @@ export default function Sidebar() {
       <div className="w-full p-4 border-t border-harvest-100">
         {/* <div> */}
 
-          {/* 1 */}
+        {/* 1 */}
         <div className="flex items-center gap-3 px-3 py-1 rounded-xl group">
           <div className="w-8 h-8 rounded-full bg-harvest-200 flex items-center justify-center text-harvest-700 font-bold text-sm flex-shrink-0">
             {session?.user?.name?.[0]?.toUpperCase() ?? "U"}
           </div>
           <div className="flex-1 min-w-0 sm:block">
-            <p className="text-sm font-semibold text-earth-900 truncate">
+            <p className="text-sm font-semibold text-slate-800 truncate">
               {session?.user?.name}
             </p>
             {/* <button
@@ -154,32 +173,31 @@ export default function Sidebar() {
               className="p-1.5 rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
               title="Sign out"
             > */}
-              <span
-                className={cn(
-                  "text-xs font-semibold px-1.5 py-0.5 rounded-md",
-                  ROLE_COLORS[role],
-                )}
-              >
-                {role.charAt(0) + role.slice(1).toLowerCase().replace("_", "-")}
-              </span>
+            <span
+              className={cn(
+                "text-xs font-semibold px-1.5 py-0.5 rounded-md",
+                ROLE_COLORS[role],
+              )}
+            >
+              {role.charAt(0) + role.slice(1).toLowerCase().replace("_", "-")}
+            </span>
             {/* </button> */}
-          </div> 
+          </div>
         </div>
-
 
         {/* </div> */}
         {/* 2 */}
-         <div className="w-full flex items-center gap-3 px-3 py-2 my-2 bg-harvest-50 rounded-xl hover:bg-harvest-100">
+        <div className="w-full flex items-center gap-3 px-3 py-2 my-2 bg-harvest-50 rounded-xl hover:bg-harvest-100">
           <div className="flex-1 min-w-0 sm:block">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="p-1.5 text-sm rounded-lg text-earth-400"
+              className="p-1.5 flex gap-2 items-center justify-between text-sm rounded-lg text-harvest-600"
               title="Sign out"
             >
-               Log Out
+              Log Out
+              <LogOut className="w-4 h-4 text-harvest-600" />
             </button>
           </div>
-          <LogOut className="w-4 h-4 text-harvest-400" />
         </div>
       </div>
     </div>
@@ -211,11 +229,11 @@ export default function Sidebar() {
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 z-40 w-64 h-[100%] bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
+          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="h-full">{sidebarContent}</div>
+        <div className="h-screen">{sidebarContent}</div>
       </aside>
     </>
   );

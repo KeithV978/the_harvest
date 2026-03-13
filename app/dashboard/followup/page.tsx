@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { FileText, Activity, CheckCircle, Clock, Flame } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
+import AnnouncementsBanner from "@/components/AnnouncementsBanner";
 import { useSession } from "next-auth/react";
 
 export default function FollowupDashboardPage() {
@@ -45,9 +46,11 @@ export default function FollowupDashboardPage() {
   return (
     <div className="mt-12">
       <div className="page-header">
-        <h1 className="page-title">Follow-Up Dashboard</h1>
-        <p className="page-subtitle">Leads assigned to  <strong>{session?.user?.name}</strong> by the admin</p>
+        <h1 className="page-title">Welcome, {session?.user?.name?.split(" ")[0]}</h1>
+        <p className="page-subtitle">Welcome to your dashboard. Here you see all the leads assigned to you by your Pastor.</p>
       </div>
+
+      <AnnouncementsBanner />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(card => (
@@ -55,8 +58,8 @@ export default function FollowupDashboardPage() {
             <div className={`inline-flex p-2 rounded-xl ${card.color} mb-3`}>
               <card.icon className="w-5 h-5" />
             </div>
-            <div className="text-2xl font-bold font-display text-earth-900">{card.value}</div>
-            <div className="text-sm text-earth-500 mt-0.5"> 
+            <div className="text-2xl font-bold font-display text-slate-900">{card.value}</div>
+            <div className="text-sm text-slate-500 mt-0.5"> 
               {card.label}</div>
           </div>
         ))}
@@ -64,10 +67,10 @@ export default function FollowupDashboardPage() {
 
       <div className="harvest-card overflow-hidden">
         <div className="px-6 py-4 border-b border-harvest-100">
-          <h2 className="font-display font-semibold text-earth-900">My Assigned Leads</h2>
+          <h2 className="font-display font-semibold text-slate-900">My Assigned Leads</h2>
         </div>
         {loading ? (
-          <div className="py-16 text-center text-earth-400">Loading...</div>
+          <div className="py-16 text-center text-slate-400">Loading...</div>
         ) : (
           <LeadTable
             leads={leads}
@@ -79,7 +82,7 @@ export default function FollowupDashboardPage() {
 
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4 border-t border-harvest-100">
-            <span className="text-sm text-earth-500">Page {page} of {totalPages}</span>
+            <span className="text-sm text-slate-500">Page {page} of {totalPages}</span>
             <div className="flex gap-2 w-full sm:w-auto">
               <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">← Prev</button>
               <button disabled={page === totalPages} onClick={() => setPage(p => p + 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">Next →</button>

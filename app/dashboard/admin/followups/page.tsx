@@ -35,8 +35,8 @@ export default function FollowupsPage() {
           <div className="py-16 text-center text-earth-400">Loading...</div>
         ) : users.length === 0 ? (
           <div className="py-16 text-center">
-            <UserCheck className="w-8 h-8 text-earth-300 mx-auto mb-2" />
-            <p className="text-earth-400 text-sm">No follow-up members yet</p>
+            <UserCheck className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+            <p className="text-slate-400 text-sm">No follow-up members yet</p>
           </div>
         ) : (
           <div className="w-full overflow-x-auto -mx-2 px-2 lg:mx-0 lg:px-0">
@@ -46,7 +46,7 @@ export default function FollowupsPage() {
 
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4 border-t border-harvest-100">
-            <span className="text-sm text-earth-500">Page {page} of {totalPages}</span>
+            <span className="text-sm text-slate-500">Page {page} of {totalPages}</span>
             <div className="flex gap-2 w-full sm:w-auto">
               <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">← Prev</button>
               <button disabled={page === totalPages} onClick={() => setPage(p => p + 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">Next →</button>

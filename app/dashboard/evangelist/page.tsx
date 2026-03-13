@@ -12,6 +12,7 @@ export default async function EvangelistDashboardPage() {
   const user = session.user as any;
   if (user.role === "ADMIN") redirect("/dashboard/admin");
   if (user.role === "FOLLOWUP") redirect("/dashboard/followup");
+ 
 
   // Fetch total counts for stats
   const totalLeads = await prisma.lead.count({
@@ -41,6 +42,13 @@ export default async function EvangelistDashboardPage() {
     take: 10,
   });
 
+  const usr = await prisma.user.findUnique({
+    where: { id: user.id },
+    select: {
+      gender: true,
+    },
+  });
+
   const stats = {
     total: totalLeads,
     newLeads: newLeadsCount,
@@ -48,5 +56,5 @@ export default async function EvangelistDashboardPage() {
     converted: convertedCount,
   };
 
-  return <EvangelistDashboardClient leads={JSON.parse(JSON.stringify(leads))} stats={stats} userName={user.name} />;
+  return <EvangelistDashboardClient leads={JSON.parse(JSON.stringify(leads))} stats={stats} userName={user.name} gender={usr?.gender} />;
 }

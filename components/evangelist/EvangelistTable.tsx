@@ -23,7 +23,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
                 <div className="w-8 h-8 rounded-full bg-harvest-100 flex items-center justify-center text-harvest-700 font-bold text-sm">
                   {user.name[0]}
                 </div>
-                <span className="font-medium text-earth-900">{user.name}</span>
+                <span className="font-medium text-earth-900"> {user.gender === "MALE"? "Bro" : "Sis"}{" "}{user.name}</span>
               </div>
             </td>
             <td className="text-earth-600">{user.email}</td>

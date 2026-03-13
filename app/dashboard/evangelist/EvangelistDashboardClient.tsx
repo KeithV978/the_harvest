@@ -4,15 +4,17 @@ import { useState } from "react";
 import Link from "next/link";
 import { Plus, TrendingUp, Users, Activity, CheckCircle } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
+import AnnouncementsBanner from "@/components/AnnouncementsBanner";
 import AddLeadModal from "@/components/leads/AddLeadModal";
 
 interface Props {
   leads: any[];
   stats: { total: number; newLeads: number; followingUp: number; converted: number };
   userName: string;
+  gender: string;
 }
 
-export default function EvangelistDashboardClient({ leads: initialLeads, stats, userName }: Props) {
+export default function EvangelistDashboardClient({ leads: initialLeads, stats, userName, gender }: Props) {
   const [leads, setLeads] = useState(initialLeads);
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -30,15 +32,17 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
 
   return (
     <div>
-      <div className="pt-6 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+      <div className="pt-12 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
-          <h1 className="page-title">Welcome Harvester, {userName.split(" ")[0]} 👋</h1>
+          <h1 className="page-title">Welcome, {gender === "MALE"? "Bro" : "Sis"}{" "} {userName.split(" ")[0]} 👋</h1>
           <p className="page-subtitle">Here's a summary of your harvest work</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="harvest-btn-primary w-full sm:w-auto">
           <Plus className="w-4 h-4" /> Add Lead
         </button>
       </div>
+
+      <AnnouncementsBanner />
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -47,8 +51,8 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
             <div className={`inline-flex p-2 rounded-xl ${card.color} mb-3`}>
               <card.icon className="w-5 h-5" />
             </div>
-            <div className="text-2xl font-bold font-display text-earth-900">{card.value}</div>
-            <div className="text-sm text-earth-500 mt-0.5">{card.label}</div>
+            <div className="text-2xl font-bold font-display text-slate-900">{card.value}</div>
+            <div className="text-sm text-slate-500 mt-0.5">{card.label}</div>
           </div>
         ))}
       </div>
@@ -56,7 +60,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
       {/* Recent leads */}
       <div className="harvest-card overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100">
-          <h2 className="font-display font-semibold text-earth-900">Recent Leads</h2>
+          <h2 className="font-display font-semibold text-slate-900">Recent Leads</h2>
           <Link href="/dashboard/evangelist/leads" className="text-sm text-harvest-600 hover:text-harvest-700 font-medium">
             View all →
           </Link>

@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus, SMSType } from "@prisma/client";
 import { z } from "zod";
+import { sendSMS, getSMSTemplate, renderTemplate } from "@/lib/sms";
 
 const createLeadSchema = z.object({
   fullName: z.string().min(1),
@@ -87,7 +88,7 @@ export async function POST(req: NextRequest) {
       data: {
         ...data,
         status: LeadStatus.NEW_LEAD,
-        addedBy: {
+        addedBy: {  
           connect: { id: user.id },
         },
       },
@@ -95,6 +96,44 @@ export async function POST(req: NextRequest) {
         addedBy: { select: { id: true, name: true } },
       },
     });
+
+    // Send SMS alerts to all admins with phone numbers
+    try {
+      const admins = await prisma.user.findMany({
+        where: { role: "ADMIN" },
+        include: {
+          adminPhones: {
+            select: { phone: true },
+          },
+        },
+      });
+
+      const template = await getSMSTemplate(SMSType.ADMIN_ALERT);
+      const adminAlertData = {
+        leadName: lead.fullName,
+        phone: lead.phone || "N/A",
+        location: lead.location,
+        status: lead.status,
+      };
+
+      // Send SMS to all admin phone numbers asynchronously (don't wait)
+      admins.forEach((admin) => {
+        admin.adminPhones.forEach((phoneRecord) => {
+          const message = renderTemplate(template, adminAlertData);
+          sendSMS({
+            phone: phoneRecord.phone,
+            message,
+            type: SMSType.ADMIN_ALERT,
+            leadId: lead.id,
+          }).catch((err) => {
+            console.error(`Failed to send admin alert SMS to ${phoneRecord.phone}:`, err);
+          });
+        });
+      });
+    } catch (smsError) {
+      console.error("Error sending admin alert SMS:", smsError);
+      // Don't fail the request if SMS sending fails
+    }
 
     return NextResponse.json(lead, { status: 201 });
   } catch (err: any) {

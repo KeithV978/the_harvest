@@ -74,18 +74,18 @@ export default function AdminDashboardPage() {
 
         {/* Date filter */}
       <div>
-          <div className="w-full mb-2 bg-earth-700 rounded-xl">
-            <button onClick={() => setIsFilterOpen(prev => !prev)} className="w-full flex justify-between text-harvest-300 bg-earth-700 py-2 px-4 rounded-xl">
+          <div className="w-full mb-2 bg-harvest-700 rounded-xl">
+            <button onClick={() => setIsFilterOpen(prev => !prev)} className="w-full flex justify-between text-white bg-harvest-800 py-2 px-4 rounded-xl">
               Date Filter {isFilterOpen ?  <ChevronDown /> : <ChevronRight />} </button>
           </div>
 
           <form onSubmit={handleFilter} className={`flex flex-col sm:flex-row sm:items-end gap-2 w-full sm:w-auto ${isFilterOpen ? "block" : "hidden"}`}>
           <div>
-            <label className="text-xs text-earth-500 block mb-1">From</label>
+            <label className="text-xs text-slate-500 block mb-1">From</label>
             <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="harvest-input text-xs py-2 w-full sm:w-36" />
           </div>
           <div>
-            <label className="text-xs text-earth-500 block mb-1">To</label>
+            <label className="text-xs text-slate-500 block mb-1">To</label>
             <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="harvest-input text-xs py-2 w-full sm:w-36" />
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
@@ -99,7 +99,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {loading ? (
-        <div className="py-20 text-center text-earth-400">Loading stats...</div>
+        <div className="py-20 text-center text-slate-400">Loading stats...</div>
       ) : (
         <>
           {/* KPI Cards */}
@@ -116,8 +116,8 @@ export default function AdminDashboardPage() {
                 <div className={`inline-flex p-2 rounded-xl ${card.bg} ${card.text} mb-2`}>
                   <card.icon className="w-4 h-4" />
                 </div>
-                <div className="text-2xl font-bold font-display text-earth-900">{card.value}</div>
-                <div className="text-xs text-earth-500 mt-0.5">{card.label}</div>
+                <div className="text-2xl font-bold font-display text-slate-900">{card.value}</div>
+                <div className="text-xs text-slate-500 mt-0.5">{card.label}</div>
               </div>
             ))}
           </div>
@@ -126,7 +126,7 @@ export default function AdminDashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Lead Status */}
             <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-earth-900 mb-4">Lead Status Distribution</h3>
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Lead Status Distribution</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie data={statusData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3}>
@@ -142,7 +142,7 @@ export default function AdminDashboardPage() {
 
             {/* Soul State */}
             <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-earth-900 mb-4">Soul State Overview</h3>
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Soul State Overview</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie data={soulData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3}>
@@ -161,7 +161,7 @@ export default function AdminDashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Attendance */}
             <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-earth-900 mb-4">Church Attendance Status</h3>
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Church Attendance Status</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={attendanceData} barSize={40}>
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} />
@@ -178,9 +178,9 @@ export default function AdminDashboardPage() {
 
             {/* Church Membership */}
             <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-earth-900 mb-4">Church Membership Summary</h3>
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Church Membership Summary</h3>
               {churchData.length === 0 ? (
-                <div className="h-52 flex items-center justify-center text-earth-400 text-sm">No church data yet</div>
+                <div className="h-52 flex items-center justify-center text-slate-400 text-sm">No church data yet</div>
               ) : (
                 <ResponsiveContainer width="100%" height={220}>
                   <BarChart data={churchData} barSize={40}>

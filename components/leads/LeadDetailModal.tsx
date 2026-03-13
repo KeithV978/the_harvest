@@ -126,7 +126,7 @@ export default function LeadDetailModal({
               {lead.fullName[0]}
             </div>
             <div className="min-w-0">
-              <h2 className="font-display font-bold text-earth-900 text-sm sm:text-base truncate">{lead.fullName}</h2>
+              <h2 className="font-display font-bold text-slate-900 text-sm sm:text-base truncate">{lead.fullName}</h2>
               <div className="flex items-center gap-1 sm:gap-2 mt-0.5 flex-wrap">
                 <span className={cn("badge text-xs",
                   lead.status === "NEW_LEAD" ? "badge-new" :
@@ -162,7 +162,7 @@ export default function LeadDetailModal({
                 <button onClick={() => setConfirmDelete(false)} className="harvest-btn-secondary text-xs py-1 px-2">No</button>
               </div>
             )}
-            <button onClick={onClose} className="p-1.5 sm:p-2 rounded-xl hover:bg-harvest-50 text-earth-400">
+            <button onClick={onClose} className="p-1.5 sm:p-2 rounded-xl hover:bg-harvest-50 text-slate-400">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -185,35 +185,35 @@ export default function LeadDetailModal({
                   { label: "Added On", value: format(new Date(lead.createdAt), "MMM d, yyyy") },
                 ].map(item => (
                   <div key={item.label}>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-earth-400">{item.label}</div>
-                    <div className="text-sm text-earth-800 mt-0.5 font-medium">{item.value}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">{item.label}</div>
+                    <div className="text-sm text-slate-800 mt-0.5 font-medium">{item.value}</div>
                   </div>
                 ))}
 
                 {lead.additionalNotes && (
                   <div className="sm:col-span-2">
-                    <div className="text-xs font-semibold uppercase tracking-wider text-earth-400">Notes From Evangelist</div>
-                    <div className="text-xs sm:text-sm text-earth-700 mt-1 bg-harvest-50 rounded-xl p-2 sm:p-3">{lead.additionalNotes}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Notes From Evangelist</div>
+                    <div className="text-xs sm:text-sm text-slate-700 mt-1 bg-harvest-50 rounded-xl p-2 sm:p-3">{lead.additionalNotes}</div>
                   </div>
                 )}
 
                 {/* Church info */}
                 {lead.churchMembership && (
-                  <div className="sm:col-span-2 bg-blue-50 rounded-xl p-3 sm:p-4">
-                    <div className="font-semibold text-blue-800 text-xs sm:text-sm mb-2">⛪ Church Follow-Up</div>
+                  <div className="sm:col-span-2 bg-earth-50 rounded-xl p-3 sm:p-4">
+                    <div className="font-semibold text-earth-800 text-xs sm:text-sm mb-2">⛪ Church Follow-Up</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                       <div>
-                        <div className="text-xs text-blue-600">Church</div>
-                        <div className="text-xs sm:text-sm font-medium text-blue-900">
+                        <div className="text-xs text-earth-600">Church</div>
+                        <div className="text-xs sm:text-sm font-medium text-earth-900">
                           {lead.churchMembership === "OTHERS" ? lead.churchName : CHURCH_LABELS[lead.churchMembership as keyof typeof CHURCH_LABELS]}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-blue-600">Months Consistent</div>
-                        <div className="text-xs sm:text-sm font-medium text-blue-900">{lead.monthsConsistent ?? 0} month(s)</div>
+                        <div className="text-xs text-earth-600">Months Consistent</div>
+                        <div className="text-xs sm:text-sm font-medium text-earth-900">{lead.monthsConsistent ?? 0} month(s)</div>
                       </div>
                       <div>
-                        <div className="text-xs text-blue-600">Attendance Status</div>
+                        <div className="text-xs text-earth-600">Attendance Status</div>
                         <span className={cn("badge text-xs", att.bg, att.color)}>{att.label}</span>
                       </div>
                     </div>
@@ -282,7 +282,7 @@ export default function LeadDetailModal({
 
                 {/* Church fields - available to all editors */}
                 <div className={`border-t border-harvest-100 pt-3 sm:pt-4 ${role === "EVANGELIST" ? "hidden" : "flex"}`}>
-                  <div className="font-semibold text-earth-800 text-xs sm:text-sm mb-2 sm:mb-3">⛪ Church Follow-Up Info</div>
+                  <div className="font-semibold text-slate-800 text-xs sm:text-sm mb-2 sm:mb-3">⛪ Church Follow-Up Info</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <div>
                       <label className="harvest-label">Church Membership</label>
@@ -316,10 +316,10 @@ export default function LeadDetailModal({
 
           {/* Right: Notes */}
           <div className="md:col-span-1 space-y-3 sm:space-y-4">
-            <h3 className="font-semibold text-earth-900 text-sm">Followup Notes & Updates</h3>
+            <h3 className="font-semibold text-slate-900 text-sm">Followup Notes & Updates</h3>
             <div className="space-y-2 max-h-48 sm:max-h-64 overflow-y-auto">
               {(lead.notes ?? []).length === 0 && (
-                <p className="text-xs text-earth-400 italic">No notes yet.</p>
+                <p className="text-xs text-slate-400 italic">No notes yet.</p>
               )}
               {(lead.notes ?? []).map((note: any) => (
                 <div key={note.id} className="bg-harvest-50 rounded-lg p-2 sm:p-3">
@@ -327,10 +327,10 @@ export default function LeadDetailModal({
                     <div className="w-5 h-5 rounded-full bg-harvest-200 flex items-center justify-center text-harvest-700 text-xs font-bold flex-shrink-0">
                       {note.user?.name?.[0] ?? "?"}
                     </div>
-                    <span className="text-xs font-semibold text-earth-700 truncate">{note.user?.name}</span>
-                    <span className="text-xs text-earth-400 ml-auto flex-shrink-0">{format(new Date(note.createdAt), "MMM d")}</span>
+                    <span className="text-xs font-semibold text-slate-700 truncate">{note.user?.name}</span>
+                    <span className="text-xs text-slate-400 ml-auto flex-shrink-0">{format(new Date(note.createdAt), "MMM d")}</span>
                   </div>
-                  <p className="text-xs text-earth-700">{note.content}</p>
+                  <p className="text-xs text-slate-700">{note.content}</p>
                 </div>
               ))}
             </div>

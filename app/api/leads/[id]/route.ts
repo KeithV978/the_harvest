@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { LeadStatus } from "@prisma/client";
+import { LeadStatus, SMSType } from "@prisma/client";
+import { sendSMS, getSMSTemplate, renderTemplate } from "@/lib/sms";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -19,7 +20,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         include: { user: { select: { id: true, name: true } } },
         orderBy: { createdAt: "asc" },
       },
-    },
+    },  
   });
 
   if (!lead) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -61,8 +62,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     delete updateData.addedById;
   }
 
+  // Track if assignment is changing
+  const isAssignmentChange = body.assignedToId && lead.assignedToId !== body.assignedToId;
+
   // If admin assigns someone, update status to FOLLOWING_UP
-  if (body.assignedToId && lead.assignedToId !== body.assignedToId) {
+  if (isAssignmentChange) {
     updateData.status = LeadStatus.FOLLOWING_UP;
   }
 
@@ -71,13 +75,39 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     data: updateData,
     include: {
       addedBy: { select: { id: true, name: true } },
-      assignedTo: { select: { id: true, name: true } },
+      assignedTo: { select: { id: true, name: true, phone: true } },
       notes: {
         include: { user: { select: { id: true, name: true } } },
         orderBy: { createdAt: "asc" },
       },
     },
   });
+
+  // Send SMS to assigned followup member
+  if (isAssignmentChange && updated.assignedTo?.phone) {
+    try {
+      const template = await getSMSTemplate(SMSType.FOLLOWUP_ASSIGNMENT);
+      const assignmentData = {
+        assigneeName: updated.assignedTo.name,
+        leadName: updated.fullName,
+        location: updated.location,
+        phone: updated.phone || "N/A",
+      };
+
+      const message = renderTemplate(template, assignmentData);
+      sendSMS({
+        phone: updated.assignedTo.phone,
+        message,
+        type: SMSType.FOLLOWUP_ASSIGNMENT,
+        leadId: updated.id,
+      }).catch((err) => {
+        console.error(`Failed to send followup assignment SMS to ${updated.assignedTo?.phone}:`, err);
+      });
+    } catch (smsError) {
+      console.error("Error sending followup assignment SMS:", smsError);
+      // Don't fail the request if SMS sending fails
+    }
+  }
 
   return NextResponse.json(updated);
 }

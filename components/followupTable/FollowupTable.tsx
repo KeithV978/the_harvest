@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { format } from "date-fns"; 
 
 
@@ -24,16 +23,16 @@ const FollowupTable = ({ followups }: { followups: any[] }) => {
                       <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">
                         {user.name[0]}
                       </div>
-                      <span className="font-medium text-earth-900">{user.name}</span>
+                      <span className="font-medium text-slate-900">{user.name}</span>
                     </div>
                   </td>
-                  <td className="text-earth-600">{user.email}</td>
+                  <td className="text-slate-600">{user.email}</td>
                   <td>
                     <span className="badge bg-blue-100 text-blue-700">
                       {user._count?.assignedLeads ?? 0} leads
                     </span>
                   </td>
-                  <td className="text-earth-400 text-sm">{format(new Date(user.createdAt), "MMM d, yyyy")}</td>
+                  <td className="text-slate-400 text-sm">{format(new Date(user.createdAt), "MMM d, yyyy")}</td>
                 </tr>
               ))}
             </tbody>
@@ -53,22 +52,22 @@ const FollowupTable = ({ followups }: { followups: any[] }) => {
                     {user.name[0]}
                   </div>
                   <div className="min-w-0">
-                    <div className="font-semibold text-earth-900 truncate">{user.name}</div>
-                    <div className="text-xs text-earth-400 truncate">{user.email}</div>
+                    <div className="font-semibold text-slate-900 truncate">{user.name}</div>
+                    <div className="text-xs text-slate-400 truncate">{user.email}</div>
                   </div>
                 </div>
               </div>
               
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-earth-500">Assigned Leads</span>
+                  <span className="text-slate-500">Assigned Leads</span>
                   <span className="badge bg-blue-100 text-blue-700">
                     {user._count?.assignedLeads ?? 0} leads
                   </span>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-blue-100">
-                  <span className="text-earth-500">Joined</span>
-                  <span className="text-earth-400 text-xs">{format(new Date(user.createdAt), "MMM d, yyyy")}</span>
+                  <span className="text-slate-500">Joined</span>
+                  <span className="text-slate-400 text-xs">{format(new Date(user.createdAt), "MMM d, yyyy")}</span>
                 </div>
               </div>
             </div>

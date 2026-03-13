@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, Mail, Lock, LogIn, AlertCircle, Zap, HeartHandshake } from "lucide-react";
+import { User, Mail, Lock, LogIn, AlertCircle, Zap, HeartHandshake, Phone, Users } from "lucide-react";
 
 export default function SignupPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "EVANGELIST" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", gender: "", phone: "", role: "EVANGELIST" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -101,6 +101,41 @@ export default function SignupPage() {
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+                Phone Number (Optional)
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <input
+                  type="tel"
+                  value={form.phone}
+                  onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                  placeholder="+234 XXX XXX XXXX"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                />
+              </div>
+            </div>
+
+             <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+               Gender
+              </label>
+              <div className="relative">
+                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <select 
+                required
+                  value={form.gender}
+                  onChange={e => setForm(f => ({ ...f, gender: e.target.value }))} 
+                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                >
+                  <option value="">Gender</option>
+                  <option className="text-slate-600" value="MALE">Male</option>
+                  <option className="text-slate-600" value="FEMALE">Female</option>
+                </select>
+              </div>
+            </div>
+
+               <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -116,7 +151,6 @@ export default function SignupPage() {
                 />
               </div>
             </div>
-
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
                 Role

@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["'Playfair Display'", "Georgia", "serif"],
-        body: ["'DM Sans'", "sans-serif"],
+        display: ["'Inter'", "sans-serif"],
+        body: ["'Inter'", "sans-serif"],
         mono: ["'DM Mono'", "monospace"],
       },
       colors: {
@@ -27,17 +27,17 @@ module.exports = {
           950: "#431e04",
         },
         earth: {
-          50: "#eceef5",
-          100: "#d0d4e7",
-          200: "#a1a9cf",
-          300: "#727eb7",
-          400: "#4d5a9f",
-          500: "#374a8c",
-          600: "#2d3d7a",
-          700: "#243066",
-          800: "#1a2044", // your original
-          900: "#111630",
-          950: "#080b1a",
+          50: "#eef3ff",
+          100: "#dce8ff",
+          200: "#b2ccff",
+          300: "#7aaafd",
+          400: "#4a82fc", // original
+          500: "#2d65f0",
+          600: "#1e4fd8",
+          700: "#1840b0",
+          800: "#172e80",
+          900: "#182b5c",
+          950: "#0f1a38", 
         },
         forest: {
           50: "#f0fdf4",

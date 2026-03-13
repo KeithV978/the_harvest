@@ -47,18 +47,41 @@ enum ChurchMembership {
   OTHERS
 }
 
+enum SMSType {
+  NEW_LEAD_NOTIFICATION
+  ADMIN_ALERT
+  FOLLOWUP_ASSIGNMENT
+}
+
+enum SMSStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+enum TargetRole {
+  FOLLOWUP
+  EVANGELIST
+  ALL
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String
   email         String    @unique
   password      String
   role          Role      @default(EVANGELIST)
+  phone         String?
+  gender        Gender?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   addedLeads    Lead[]    @relation("AddedBy")
   assignedLeads Lead[]    @relation("AssignedTo")
   notes         Note[]
+  smsTemplates  SMSTemplate[]
+  announcements Announcement[]
+  adminPhones   AdminPhone[]
 }
 
 model Lead {
@@ -85,6 +108,7 @@ model Lead {
   assignedTo      User?             @relation("AssignedTo", fields: [assignedToId], references: [id])
 
   notes           Note[]
+  smsLogs         SMSLog[]
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
@@ -100,6 +124,43 @@ model Note {
   createdAt DateTime @default(now())
 }
 
+model SMSTemplate {
+  id        String    @id @default(cuid())
+  type      SMSType   @unique
+  title     String
+  content   String    // Template with placeholders like {leadName}, {phoneNumber}
+  createdById String
+  createdBy User      @relation(fields: [createdById], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model SMSLog {
+  id            String    @id @default(cuid())
+  type          SMSType
+  recipientPhone String
+  content       String
+  status        SMSStatus @default(PENDING)
+  errorMessage  String?
+  leadId        String?
+  lead          Lead?     @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now())
+  sentAt        DateTime?
+}
+
+model Announcement {
+  id          String      @id @default(cuid())
+  title       String
+  content     String
+  targetRole  TargetRole
+  expiryDate  DateTime
+  hidden      Boolean     @default(false)
+  createdById String
+  createdBy   User        @relation(fields: [createdById], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
 model PasswordResetToken {
   id        String   @id @default(cuid())
   email     String
@@ -107,4 +168,15 @@ model PasswordResetToken {
   used      Boolean  @default(false)
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model AdminPhone {
+  id        String   @id @default(cuid())
+  phone     String
+  adminId   String
+  admin     User     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([adminId, phone])
 } 

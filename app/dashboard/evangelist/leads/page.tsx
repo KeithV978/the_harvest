@@ -33,7 +33,7 @@ export default function EvangelistLeadsPage() {
 
   return (
     <div>
-      <div className="page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+      <div className="pt-12 page-header flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="page-title">My Leads</h1>
           <p className="page-subtitle">{total} leads added by you</p>
@@ -58,7 +58,7 @@ export default function EvangelistLeadsPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-earth-400">Loading leads...</div>
+          <div className="py-16 text-center text-slate-400">Loading leads...</div>
         ) : (
           <LeadTable
             leads={filtered}
@@ -68,7 +68,7 @@ export default function EvangelistLeadsPage() {
 
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4 border-t border-harvest-100">
-            <span className="text-sm text-earth-500">Page {page} of {totalPages}</span>
+            <span className="text-sm text-slate-500">Page {page} of {totalPages}</span>
             <div className="flex gap-2 w-full sm:w-auto">
               <button
                 disabled={page === 1}
