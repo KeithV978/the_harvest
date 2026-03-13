@@ -7,25 +7,33 @@ import { useSession } from "next-auth/react";
 
 export default function FollowupDashboardPage() {
   const [leads, setLeads] = useState<any[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-   const { data: session } = useSession();
-     
+  const { data: session } = useSession();
+  const limit = 15;
+
+  const fetchLeads = async () => {
+    setLoading(true);
+    const res = await fetch(`/api/leads?page=${page}&limit=${limit}`);
+    const data = await res.json();
+    setLeads(data.leads ?? []);
+    setTotal(data.total ?? 0);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    fetch("/api/leads?limit=50")
-      .then(r => r.json())
-      .then(d => {
-        setLeads(d.leads ?? []);
-        setLoading(false);
-      });
-  }, []);
+    fetchLeads();
+  }, [page]);
 
   const stats = {
-    total: leads.length,
+    total: total,
     followingUp: leads.filter(l => l.status === "FOLLOWING_UP").length,
     converted: leads.filter(l => l.status === "CONVERTED").length,
     hot: leads.filter(l => (l.monthsConsistent ?? 0) >= 3).length,
   };
+
+  const totalPages = Math.ceil(total / limit);
 
   const statCards = [
     { label: "Assigned Leads", icon: FileText, value: stats.total, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
@@ -67,6 +75,16 @@ export default function FollowupDashboardPage() {
             showAddedBy={true}
             onLeadUpdated={updated => setLeads(prev => prev.map(l => l.id === updated.id ? updated : l))}
           />
+        )}
+
+        {totalPages > 1 && (
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 sm:px-6 py-4 border-t border-harvest-100">
+            <span className="text-sm text-earth-500">Page {page} of {totalPages}</span>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">← Prev</button>
+              <button disabled={page === totalPages} onClick={() => setPage(p => p + 1)} className="harvest-btn-secondary text-xs disabled:opacity-40">Next →</button>
+            </div>
+          </div>
         )}
       </div>
     </div>

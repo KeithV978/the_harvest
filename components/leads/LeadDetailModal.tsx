@@ -281,7 +281,7 @@ export default function LeadDetailModal({
                 )}
 
                 {/* Church fields - available to all editors */}
-                <div className="border-t border-harvest-100 pt-3 sm:pt-4">
+                <div className={`border-t border-harvest-100 pt-3 sm:pt-4 ${role === "EVANGELIST" ? "hidden" : "flex"}`}>
                   <div className="font-semibold text-earth-800 text-xs sm:text-sm mb-2 sm:mb-3">⛪ Church Follow-Up Info</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     <div>
@@ -304,7 +304,7 @@ export default function LeadDetailModal({
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
+                <div className={`flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 `}>
                   <button type="button" onClick={() => setEditing(false)} className="harvest-btn-secondary flex-1 text-sm">Cancel</button>
                   <button type="button" onClick={handleSave} disabled={saving} className="harvest-btn-primary flex-1 justify-center disabled:opacity-60 text-sm">
                     <Check className="w-4 h-4" /> {saving ? "Saving..." : "Save Changes"}

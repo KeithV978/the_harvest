@@ -169,11 +169,11 @@ export default function Sidebar() {
 
         {/* </div> */}
         {/* 2 */}
-         <div className="w-full flex items-center gap-3 px-3 py-1 rounded-xl hover:bg-harvest-50 group">
+         <div className="w-full flex items-center gap-3 px-3 py-2 my-2 bg-harvest-50 rounded-xl hover:bg-harvest-100">
           <div className="flex-1 min-w-0 sm:block">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="p-1.5 text-sm rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
+              className="p-1.5 text-sm rounded-lg text-earth-400"
               title="Sign out"
             >
                Log Out

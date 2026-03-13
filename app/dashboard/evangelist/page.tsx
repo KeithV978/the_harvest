@@ -13,6 +13,24 @@ export default async function EvangelistDashboardPage() {
   if (user.role === "ADMIN") redirect("/dashboard/admin");
   if (user.role === "FOLLOWUP") redirect("/dashboard/followup");
 
+  // Fetch total counts for stats
+  const totalLeads = await prisma.lead.count({
+    where: { addedById: user.id },
+  });
+
+  const newLeadsCount = await prisma.lead.count({
+    where: { addedById: user.id, status: "NEW_LEAD" },
+  });
+
+  const followingUpCount = await prisma.lead.count({
+    where: { addedById: user.id, status: "FOLLOWING_UP" },
+  });
+
+  const convertedCount = await prisma.lead.count({
+    where: { addedById: user.id, status: "CONVERTED" },
+  });
+
+  // Fetch recent leads for display
   const leads = await prisma.lead.findMany({
     where: { addedById: user.id },
     include: {
@@ -24,10 +42,10 @@ export default async function EvangelistDashboardPage() {
   });
 
   const stats = {
-    total: leads.length,
-    newLeads: leads.filter(l => l.status === "NEW_LEAD").length,
-    followingUp: leads.filter(l => l.status === "FOLLOWING_UP").length,
-    converted: leads.filter(l => l.status === "CONVERTED").length,
+    total: totalLeads,
+    newLeads: newLeadsCount,
+    followingUp: followingUpCount,
+    converted: convertedCount,
   };
 
   return <EvangelistDashboardClient leads={JSON.parse(JSON.stringify(leads))} stats={stats} userName={user.name} />;

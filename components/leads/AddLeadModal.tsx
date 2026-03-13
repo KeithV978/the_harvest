@@ -38,7 +38,7 @@ export default function AddLeadModal({
     gender: "",
     location: "",
     additionalNotes: "",
-    soulState: "",
+    soulState: "NEW_CONVERT",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -171,7 +171,7 @@ export default function AddLeadModal({
                 onChange={(e) =>
                   setForm((f) => ({ ...f, location: e.target.value }))
                 }
-                placeholder="e.g. Victoria Island, Lagos"
+                placeholder="e.g. Tanke"
                 className="harvest-input"
               />
             </div>

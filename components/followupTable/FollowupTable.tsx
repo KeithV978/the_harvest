@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { format } from "date-fns";
-import { Eye } from "lucide-react";
+import { format } from "date-fns"; 
 
 
 const FollowupTable = ({ followups }: { followups: any[] }) => {

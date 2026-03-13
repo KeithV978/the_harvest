@@ -1,6 +1,4 @@
-import { format } from "date-fns";
-import { useState } from "react";
-import { Eye } from "lucide-react";
+import { format } from "date-fns"; 
 
 
 const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
