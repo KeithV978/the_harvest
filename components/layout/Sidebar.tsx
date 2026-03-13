@@ -134,13 +134,13 @@ export default function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="w-full my-4 border-t border-harvest-100">
+      <div className="p-4 border-t border-harvest-100">
         <button
           onClick={() => signOut({ callbackUrl: "/auth/login" })}
-          className=" rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
+          className="p-1.5 rounded-lg text-earth-400 hover:text-red-500 hover:bg-red-50 transition-all"
           title="Sign out"
         >
-          <div className="flex items-center gap-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
+          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
             <div className="w-8 h-8 rounded-full bg-harvest-200 flex items-center justify-center text-harvest-700 font-bold text-sm flex-shrink-0">
               {session?.user?.name?.[0]?.toUpperCase() ?? "U"}
             </div>
