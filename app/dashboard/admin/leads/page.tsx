@@ -60,7 +60,7 @@ export default function AdminLeadsPage() {
               onClick={() => setIsFilterOpen((prev) => !prev)}
               className="w-full flex justify-between text-harvest-300 bg-earth-700 py-2 px-4 rounded-xl"
             >
-              Date Filter{" "}
+              Filters{" "}
               {isFilterOpen ? <ChevronDown /> : <ChevronRight />}{" "}
             </button>
           </div>
