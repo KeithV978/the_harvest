@@ -164,6 +164,7 @@ export default function Sidebar() {
         </div>
 
 
+        </div>
         {/* 2 */}
          <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-harvest-50 group">
           <div className="flex-1 min-w-0 sm:block">
@@ -176,7 +177,6 @@ export default function Sidebar() {
             </button>
           </div>
           <LogOut className="w-4 h-4" />
-        </div>
         </div>
       </div>
     </div>
