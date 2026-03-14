@@ -274,7 +274,9 @@ export default function ActivityLogPage() {
 
       {/* Activity Detail Modal */}
       {showDetailModal && selectedLog && (
-        <ActivityDetailModal log={selectedLog} onClose={() => setShowDetailModal(false)} />
+        <div className="relative z-50">
+          <ActivityDetailModal log={selectedLog} onClose={() => setShowDetailModal(false)} />
+        </div>
       )}
     </div>
   );
