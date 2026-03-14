@@ -7,6 +7,7 @@ const updateProfileSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
   email: z.string().email("Invalid email address").optional(),
   phone: z.string().optional(),
+  gender: z.enum(["MALE", "FEMALE"]).optional(),
 });
 
 export async function PATCH(request: Request) {
