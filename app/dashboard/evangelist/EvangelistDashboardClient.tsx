@@ -11,7 +11,7 @@ interface Props {
   leads: any[];
   stats: { total: number; newLeads: number; followingUp: number; converted: number };
   userName: string;
-  gender: string;
+  gender: string | null | undefined;
 }
 
 export default function EvangelistDashboardClient({ leads: initialLeads, stats, userName, gender }: Props) {
