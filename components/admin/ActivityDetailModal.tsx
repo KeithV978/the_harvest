@@ -20,7 +20,7 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
       <div onClick={onClose} className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
 
       {/* Modal */}
-      <div className="fixed mt-[1rem] inset-0 z-50 flex items-center justify-center p-4 pointer-events-none overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div
           onClick={(e) => e.stopPropagation()}
           className="bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-2xl overflow-y-auto pointer-events-auto animate-fadeIn  scrollbar-hide"
