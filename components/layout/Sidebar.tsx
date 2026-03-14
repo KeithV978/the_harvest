@@ -187,15 +187,15 @@ export default function Sidebar() {
 
         {/* </div> */}
         {/* 2 */}
-        <div className="w-full flex items-center gap-3 px-3 py-2 my-2 bg-harvest-50 rounded-xl hover:bg-harvest-100">
-          <div className="flex-1 min-w-0 sm:block">
+        <div className="w-full flex items-center gap-3 px-3 py-2 my-2 rounded-xl hover:bg-harvest-100">
+          <div className="flex-1 min-w-0 mt-2 sm:block">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="p-1.5 flex gap-2 items-center justify-between text-sm rounded-lg text-harvest-600"
+              className="flex gap-2 items-center w-full justify-between text-sm rounded-lg text-harvest-600"
               title="Sign out"
             >
               Log Out
-              <LogOut className="w-4 h-4 text-harvest-600" />
+              <LogOut className="w-4 h-4 text-slate-600" />
             </button>
           </div>
         </div>
@@ -229,11 +229,11 @@ export default function Sidebar() {
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 z-40 w-64 h-[90vh] bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
+          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="h-full">{sidebarContent}</div>
+        <div className="h-[95%]">{sidebarContent}</div>
       </aside>
     </>
   );

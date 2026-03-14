@@ -222,7 +222,7 @@ const SMSSettingsPage = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="py-6">
       <div className="mb-6">
         <h1 className="page-title">SMS & Notifications Settings</h1>
         <p className="page-subtitle">
@@ -234,7 +234,7 @@ const SMSSettingsPage = () => {
       <div className="flex gap-2 mb-6 border-b border-slate-200">
         <button
           onClick={() => setActiveTab("templates")}
-          className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+          className={`flex items-center gap-1 md:gap-2 md:px-4 md:py-3 border-b-2 transition ${
             activeTab === "templates"
               ? "border-harvest-500 text-harvest-600"
               : "border-transparent text-slate-600 hover:text-slate-900"
@@ -244,7 +244,7 @@ const SMSSettingsPage = () => {
         </button>
         <button
           onClick={() => setActiveTab("users")}
-          className={`flex items-center gap-2 px-4 py-3 border-b-2 transition ${
+          className={`flex items-center gap-1 md:gap-2 md:px-4 md:py-3 border-b-2 transition ${
             activeTab === "users"
               ? "border-harvest-500 text-harvest-600"
               : "border-transparent text-slate-600 hover:text-slate-900"
@@ -372,7 +372,7 @@ const SMSSettingsPage = () => {
                   <div className="flex gap-2 pt-2">
                     <button
                       onClick={() => handleSave(template.type)}
-                      className="harvest-btn-primary flex items-center gap-2 flex-1"
+                      className="harvest-btn-primary flex items-center text-sm gap-1 md:gap-2 flex-1"
                     >
                       {loading ? (
                         <div role="status">
@@ -397,7 +397,7 @@ const SMSSettingsPage = () => {
                       ) : (
                         <Save size={18} />
                       )}{" "}
-                      Save Changes
+                      Save
                     </button>
                     <button
                       onClick={cancelEdit}

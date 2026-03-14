@@ -3,17 +3,21 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { User, Mail, Phone, AlertCircle, CheckCircle } from "lucide-react";
+import { User, Mail, Phone, AlertCircle, CheckCircle, Users } from "lucide-react";
 
 export default function FollowupProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
+    gender: "",
     phone: "",
   });
 
@@ -38,6 +42,7 @@ export default function FollowupProfilePage() {
             name: data.user.name || "",
             email: data.user.email || "",
             phone: data.user.phone || "",
+            gender: data.user.gender || "",
           });
         }
       } catch (error) {
@@ -97,11 +102,10 @@ export default function FollowupProfilePage() {
   }
 
   return (
-    <div className="min-h-screen mt-6 p-4 md:p-8">
+    <div className="min-h-screen mt-6 py-4 md:p-8">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
-         
           <h1 className="text-2xl md:text-3xl font-bold text-slate-600">
             Edit Profile
           </h1>
@@ -122,7 +126,9 @@ export default function FollowupProfilePage() {
                   <input
                     type="text"
                     value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, name: e.target.value }))
+                    }
                     placeholder="Your full name"
                     className="w-full bg-white border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
                   />
@@ -139,10 +145,32 @@ export default function FollowupProfilePage() {
                   <input
                     type="email"
                     value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, email: e.target.value }))
+                    }
                     placeholder="your@email.com"
                     className="w-full bg-white/10 border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
                   />
+                </div>
+              </div>
+              {/* Gender */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                  Gender
+                </label>
+                <div className="relative">
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                  <select
+                    value={form.gender}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, gender: e.target.value }))
+                    }
+                    className="w-full bg-white/10 border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
                 </div>
               </div>
 
@@ -156,7 +184,9 @@ export default function FollowupProfilePage() {
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, phone: e.target.value }))
+                    }
                     placeholder="+234 XXX XXX XXXX"
                     className="w-full bg-white border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
                   />
@@ -195,7 +225,8 @@ export default function FollowupProfilePage() {
           {/* Info Card */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
             <p className="text-harvest-500 text-sm">
-              💡 Keep your contact information up to date so the team can reach you easily.
+              💡 Keep your contact information up to date so the team can reach
+              you easily.
             </p>
           </div>
         </div>

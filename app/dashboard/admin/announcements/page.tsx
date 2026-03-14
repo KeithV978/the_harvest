@@ -159,7 +159,7 @@ const AnnouncementsPage = () => {
   const isExpired = (date: string) => new Date(date) < new Date();
 
   return (
-    <div className="p-6">
+    <div className="py-6">
       <div className="flex justify-between flex-col gap-2 sm:flex-row sm:items-center mb-6">
         <div>
           <h1 className="page-title">Announcements</h1>

@@ -137,7 +137,7 @@ export default function SMSLogsPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="py-6">
       <div className="mb-6">
         <h1 className="page-title">SMS Logs</h1>
         <p className="page-subtitle">Track all SMS messages sent through the system</p>

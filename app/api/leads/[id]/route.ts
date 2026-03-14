@@ -85,6 +85,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
   // Send SMS to assigned followup member
   if (isAssignmentChange && updated.assignedTo?.phone) {
+    // console.log("sms")
     try {
       const template = await getSMSTemplate(SMSType.FOLLOWUP_ASSIGNMENT);
       const assignmentData = {
