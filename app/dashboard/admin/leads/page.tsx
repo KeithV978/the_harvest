@@ -58,7 +58,7 @@ export default function AdminLeadsPage() {
           <div className="w-full mb-2 bg-harvest-800 rounded-xl">
             <button
               onClick={() => setIsFilterOpen((prev) => !prev)}
-              className={`w-full flex sm:justify-between md:justify-start text-white bg-harvest-900 py-2 px-4 rounded-xl `}
+              className={`w-full flex sm:justify-between md:justify-start text-white bg-harvest-500 py-2 px-4 rounded-xl `}
             >
               Filters{" "}
               {isFilterOpen ? <ChevronDown /> : <ChevronRight />}{" "}
