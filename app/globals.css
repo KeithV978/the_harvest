@@ -52,11 +52,11 @@ body {
 }
 
 .harvest-input {
-  @apply w-full rounded-xl border border-harvest-200 bg-harvest-50/50 px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
+  @apply w-full rounded-xl border border-harvest-200 bg-white hover:bg-harvest-50 px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
 }
 
 .harvest-label {
-  @apply block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5;
+  @apply block text-xs font-semibold uppercase tracking-wider text-harvest-600 mb-1.5;
 }
 
 .harvest-select {

@@ -229,11 +229,11 @@ export default function Sidebar() {
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
+          "lg:hidden fixed top-0 left-0 z-40 w-64 h-[90vh] bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="h-screen">{sidebarContent}</div>
+        <div className="h-full">{sidebarContent}</div>
       </aside>
     </>
   );
