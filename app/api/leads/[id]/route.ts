@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { LeadStatus, SMSType } from "@prisma/client";
 import { sendSMS, getSMSTemplate, renderTemplate } from "@/lib/sms";
+import { logFieldChange, logStatusChange, logAssignment } from "@/lib/audit";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -82,6 +83,28 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       },
     },
   });
+
+  // Log field changes
+  for (const [key, value] of Object.entries(updateData)) {
+    const oldValue = (lead as any)[key];
+    if (oldValue !== value) {
+      if (key === 'status') {
+        await logStatusChange(params.id, user.id, String(oldValue || ""), String(value || ""));
+      } else {
+        await logFieldChange(params.id, user.id, key, String(oldValue || ""), String(value || ""));
+      }
+    }
+  }
+
+  // Log assignment change
+  if (isAssignmentChange) {
+    await logAssignment(
+      params.id,
+      user.id,
+      updated.assignedToId,
+      updated.assignedTo?.name
+    );
+  }
 
   // Send SMS to assigned followup member
   if (isAssignmentChange && updated.assignedTo?.phone) {

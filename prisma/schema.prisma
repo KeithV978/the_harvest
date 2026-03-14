@@ -65,6 +65,14 @@ enum TargetRole {
   ALL
 }
 
+enum AuditLogType {
+  NOTE
+  FIELD_CHANGE
+  SMS_SENT
+  STATUS_CHANGE
+  ASSIGNMENT
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String
@@ -82,6 +90,7 @@ model User {
   smsTemplates  SMSTemplate[]
   announcements Announcement[]
   adminPhones   AdminPhone[]
+  auditLogs     AuditLog[]
 }
 
 model Lead {
@@ -109,6 +118,7 @@ model Lead {
 
   notes           Note[]
   smsLogs         SMSLog[]
+  auditLogs       AuditLog[]
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
@@ -179,4 +189,19 @@ model AdminPhone {
   updatedAt DateTime @updatedAt
 
   @@unique([adminId, phone])
-} 
+}
+
+model AuditLog {
+  id          String        @id @default(cuid())
+  type        AuditLogType
+  leadId      String
+  lead        Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  fieldName   String?       // Name of field that changed (only for FIELD_CHANGE type)
+  oldValue    String?       // Previous value (only for FIELD_CHANGE type)
+  newValue    String?       // New value (only for FIELD_CHANGE type)
+  noteContent String?       // Content of note (only for NOTE type)
+  details     Json?         // Flexible JSON for additional metadata
+  createdAt   DateTime      @default(now())
+}

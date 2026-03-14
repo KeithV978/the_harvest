@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { logNoteCreated } from "@/lib/audit";
 
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -31,6 +32,9 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       user: { select: { id: true, name: true } },
     },
   });
+
+  // Log note creation as audit event
+  await logNoteCreated(params.id, user.id, content);
 
   return NextResponse.json(note, { status: 201 });
 }

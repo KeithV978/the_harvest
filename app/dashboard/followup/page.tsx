@@ -11,6 +11,7 @@ export default function FollowupDashboardPage() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
   const { data: session } = useSession();
   const limit = 15;
 
@@ -23,7 +24,14 @@ export default function FollowupDashboardPage() {
     setLoading(false);
   };
 
+  const fetchUser = async () => {
+    const res = await fetch("/api/users/profile");
+    const data = await res.json();
+    setUser(data.user)
+  }
+
   useEffect(() => {
+    fetchUser()
     fetchLeads();
   }, [page]);
 
@@ -45,8 +53,9 @@ export default function FollowupDashboardPage() {
 
   return (
     <div className="mt-12">
-      <div className="page-header">
-        <h1 className="page-title">Welcome, {session?.user?.name?.split(" ")[0]}</h1>
+      <div className="page-header"> 
+          <h1 className="page-title">Welcome, {user?.gender === "MALE"? "Bro" : "Sis"}{" "} {session?.user?.name?.split(" ")[0]} 👋</h1>
+
         <p className="page-subtitle">Welcome to your dashboard. Here you see all the leads assigned to you by your Pastor.</p>
       </div>
 

@@ -336,7 +336,7 @@ export default function LeadDetailModal({
             </div>
 
             {/* Add note */}
-            <div className="border-t border-harvest-100 pt-2 sm:pt-3">
+            {role !== "EVANGELIST" && (<div className="border-t border-harvest-100 pt-2 sm:pt-3">
               <textarea
                 rows={2}
                 value={noteText}
@@ -354,7 +354,7 @@ export default function LeadDetailModal({
                 <span className="hidden sm:inline">{postingNote ? "Posting..." : "Post Note"}</span>
                 <span className="sm:hidden">{postingNote ? "..." : "Post"}</span>
               </button>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>

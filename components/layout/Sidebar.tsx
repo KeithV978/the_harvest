@@ -19,6 +19,7 @@ import {
   Megaphone,
   User,
   MessageSquare,
+  ActivitySquare,
 } from "lucide-react";
 
 interface NavItem {
@@ -55,6 +56,11 @@ const adminNav: NavItem[] = [
     href: "/dashboard/admin/followups",
     label: "All Follow-Up Team",
     icon: UserCheck,
+  },
+  {
+    href: "/dashboard/admin/activity-log",
+    label: "Followup Activities",
+    icon: ActivitySquare,
   },
   {
     href: "/dashboard/admin/announcements",
