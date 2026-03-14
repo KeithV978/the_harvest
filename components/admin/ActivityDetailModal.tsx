@@ -26,7 +26,7 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
           className="bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-2xl overflow-y-auto pointer-events-auto animate-fadeIn  scrollbar-hide"
         >
           {/* Header */}
-          <div className="sticky top-0 bg-gradient-to-r from-harvest-400 to-harvest-500 text-harvest-800 p-6 flex justify-between items-start">
+          <div className="sticky top-0 bg-gradient-to-r from-harvest-400 to-harvest-400 text-harvest-800 p-6 flex justify-between items-start">
             <div>
               <h2 className="text-2xl font-bold">{log.lead?.fullName}</h2>
               <p className="text-white text-sm mt-1 capitalize">{log.lead?.soulState?.split("_").join(" ").toLowerCase()}</p>
