@@ -162,7 +162,7 @@ export default function ActivityLogPage() {
           <>
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-xs shadow-md rounded-lg overflow-hidden">
                 <thead>
                   <tr className="border-b border-harvest-200 bg-harvest-50">
                     <th className="px-4 py-3 text-left font-semibold text-slate-700">Timestamp</th>
