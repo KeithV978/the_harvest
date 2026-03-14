@@ -17,23 +17,23 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
   return (
     <>
       {/* Backdrop */}
-      <div onClick={onClose} className="fixed inset-0 bg-black/50 z-40" />
+      <div onClick={onClose} className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none overflow-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div
           onClick={(e) => e.stopPropagation()}
-          className="bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-2xl overflow-y-auto pointer-events-auto animate-fadeIn"
+          className="bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-2xl overflow-y-auto pointer-events-auto animate-fadeIn  scrollbar-hide"
         >
           {/* Header */}
-          <div className="sticky top-0 bg-gradient-to-r from-harvest-600 to-harvest-700 text-white p-6 flex justify-between items-start">
+          <div className="sticky top-0 bg-gradient-to-r from-harvest-400 to-harvest-500 text-harvest-800 p-6 flex justify-between items-start">
             <div>
               <h2 className="text-2xl font-bold">{log.lead?.fullName}</h2>
-              <p className="text-harvest-100 text-sm mt-1">{log.lead?.location}</p>
+              <p className="text-white text-sm mt-1 capitalize">{log.lead?.soulState?.split("_").join(" ").toLowerCase()}</p>
             </div>
             <button
               onClick={onClose}
-              className="text-white hover:bg-harvest-800 p-1 rounded-lg transition-colors"
+              className="text-harvest-800 bg-white p-1 rounded-lg transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -41,24 +41,24 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
 
           <div className="p-6 space-y-6">
             {/* Activity Info */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h3 className="font-bold text-slate-800 mb-3">Activity Details</h3>
+            <div className="bg-white border border-slate-200 shadow-md rounded-lg p-4">
+              <h3 className="font-bold text-harvest-600 mb-3">Activity Details</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-slate-600">Activity Type:</span>
-                  <span className="font-semibold text-blue-700">{AUDIT_TYPE_LABELS[log.type] || log.type}</span>
+                  <span className="text-slate-600 font-bold">Activity Type:</span>
+                  <span className="font-semibold text-earth-500">{AUDIT_TYPE_LABELS[log.type] || log.type}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-600">Time:</span>
-                  <span className="font-semibold text-slate-700">{format(new Date(log.createdAt), "MMM d, yyyy HH:mm:ss")}</span>
+                  <span className="text-slate-600 font-bold">Time:</span>
+                  <span className="font-semibold text-slate-500">{format(new Date(log.createdAt), "MMM d, yyyy HH:mm:ss")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-600">Created By:</span>
-                  <span className="font-semibold text-slate-700">{log.user?.name}</span>
+                  <span className="text-slate-600 font-bold font-bold">Created By:</span>
+                  <span className="font-semibold text-slate-500">{log.user?.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-600">User Role:</span>
-                  <span className="font-semibold text-slate-700">{log.user?.role}</span>
+                  <span className="text-slate-600 font-bold">Role:</span>
+                  <span className="font-semibold text-slate-500">{log.user?.role}</span>
                 </div>
 
                 {/* Field-Specific Info */}
@@ -94,8 +94,8 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
 
                 {log.type === "NOTE" && (
                   <div className="pt-2 border-t border-blue-200">
-                    <div className="text-slate-600 mb-2">Note Content:</div>
-                    <div className="bg-white border border-blue-100 rounded p-3 text-slate-700 whitespace-pre-wrap text-sm">
+                    <div className="text-slate-600 mb-2 font-bold">Note Content:</div>
+                    <div className="bg-slate-50 border border-blue-100 rounded p-3 text-slate-700 whitespace-pre-wrap text-sm">
                       {log.noteContent}
                     </div>
                   </div>
@@ -127,7 +127,7 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
 
             {/* Lead Details Card */}
             <div className="bg-harvest-50 border border-harvest-200 rounded-lg p-4">
-              <h3 className="font-bold text-slate-800 mb-3">Lead Information</h3>
+              <h3 className="font-bold text-harvest-500 mb-3">Lead's Information</h3>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div>
                   <div className="text-slate-600">Full Name</div>
@@ -166,8 +166,8 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
 
             {/* Followup Member Info */}
             {log.lead?.assignedTo && (
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                <h3 className="font-bold text-slate-800 mb-3">Followup Member</h3>
+              <div className="bg-white border border-slate-200 rounded-lg p-4">
+                <h3 className="font-bold text-harvest-500 mb-3">Assigned Followup</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-slate-600">Name:</span>
@@ -194,8 +194,8 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
             )}
 
             {/* Church Information */}
-            <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
-              <h3 className="font-bold text-slate-800 mb-3">Church Information</h3>
+            <div className="bg-white border border-slate-200 rounded-lg p-4">
+              <h3 className="font-bold text-harvest-500 mb-3">Church Information</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-600">Church Membership:</span>
@@ -221,8 +221,8 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
             </div>
 
             {/* Added By Info */}
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-              <h3 className="font-bold text-slate-800 mb-3">Added By</h3>
+            <div className="bg-white border border-emerald-200 rounded-lg p-4">
+              <h3 className="font-bold text-harvest-500 mb-3">Added By</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-600">Evangelist:</span>
@@ -234,16 +234,7 @@ export default function ActivityDetailModal({ log, onClose }: { log: any; onClos
                 </div>
               </div>
             </div>
-
-            {/* Close Button */}
-            <div className="flex gap-2">
-              <button
-                onClick={onClose}
-                className="flex-1 harvest-btn-secondary text-sm py-3 rounded-lg font-semibold"
-              >
-                Close
-              </button>
-            </div>
+ 
           </div>
         </div>
       </div>

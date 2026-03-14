@@ -153,53 +153,97 @@ export default function ActivityLogPage() {
           </form>
         </div>
 
-        {/* Activity Table */}
+        {/* Activity Table & Card List */}
         {loading ? (
           <div className="p-8 text-center text-slate-500">Loading activity logs...</div>
         ) : activityLogs.length === 0 ? (
           <div className="p-8 text-center text-slate-500">No activity found</div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b border-harvest-200 bg-harvest-50">
-                  <th className="px-4 py-3 text-left font-semibold text-slate-700">Timestamp</th>
-                  <th className="px-4 py-3 text-left font-semibold text-slate-700">Lead</th>
-                  <th className="px-4 py-3 text-left font-semibold text-slate-700">Activity Type</th>
-                  <th className="px-4 py-3 text-left font-semibold text-slate-700">Updated By</th>
-                  <th className="px-4 py-3 text-left font-semibold text-slate-700">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {activityLogs.map((log, idx) => (
-                  <tr
-                    key={log.id}
-                    onClick={() => {
-                      setSelectedLog(log);
-                      setShowDetailModal(true);
-                    }}
-                    className={`border-b border-harvest-100 hover:bg-harvest-50 cursor-pointer transition-colors ${idx % 2 === 0 ? "bg-white" : "bg-harvest-50/30"}`}
-                  >
-                    <td className="px-4 py-3 text-slate-600">{format(new Date(log.createdAt), "MMM d, HH:mm")}</td>
-                    <td className="px-4 py-3 font-medium text-slate-800">
-                      <div className="font-semibold text-harvest-700">{log.lead?.fullName}</div>
-                      <div className="text-slate-500">{log.lead?.phone}</div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className={`px-3 py-1 rounded-full font-medium ${AUDIT_TYPE_COLORS[log.type] || "bg-gray-100 text-gray-700"}`}>
-                        {AUDIT_TYPE_LABELS[log.type] || log.type}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="font-medium text-slate-700">{log.user?.name}</div>
-                      <div className="text-slate-500">{log.user?.role}</div>
-                    </td>
-                    <td className="px-4 py-3 text-slate-600">{getActivityDescription(log)}</td>
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-harvest-200 bg-harvest-50">
+                    <th className="px-4 py-3 text-left font-semibold text-slate-700">Timestamp</th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-700">Lead</th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-700">Activity Type</th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-700">Updated By</th>
+                    <th className="px-4 py-3 text-left font-semibold text-slate-700">Description</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {activityLogs.map((log, idx) => (
+                    <tr
+                      key={log.id}
+                      onClick={() => {
+                        setSelectedLog(log);
+                        setShowDetailModal(true);
+                      }}
+                      className={`border-b border-harvest-100 hover:bg-harvest-50 cursor-pointer transition-colors ${idx % 2 === 0 ? "bg-white" : "bg-harvest-50/30"}`}
+                    >
+                      <td className="px-4 py-3 text-slate-600">{format(new Date(log.createdAt), "MMM d, HH:mm")}</td>
+                      <td className="px-4 py-3 font-medium text-slate-800">
+                        <div className="font-semibold text-harvest-700">{log.lead?.fullName}</div>
+                        <div className="text-slate-500">{log.lead?.phone}</div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`px-3 py-1 rounded-full font-medium ${AUDIT_TYPE_COLORS[log.type] || "bg-gray-100 text-gray-700"}`}>
+                          {AUDIT_TYPE_LABELS[log.type] || log.type}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="font-medium text-slate-700">{log.user?.name}</div>
+                        <div className="text-slate-500">{log.user?.role}</div>
+                      </td>
+                      <td className="px-4 py-3 text-slate-600">{getActivityDescription(log)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-3 p-4">
+              {activityLogs.map((log) => (
+                <div
+                  key={log.id}
+                  onClick={() => {
+                    setSelectedLog(log);
+                    setShowDetailModal(true);
+                  }}
+                  className="bg-white border border-harvest-200 rounded-lg p-4 hover:bg-harvest-50 cursor-pointer transition-colors"
+                >
+                  {/* Timestamp & Activity Type */}
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="text-xs text-slate-600">{format(new Date(log.createdAt), "MMM d, HH:mm")}</div>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${AUDIT_TYPE_COLORS[log.type] || "bg-gray-100 text-gray-700"}`}>
+                      {AUDIT_TYPE_LABELS[log.type] || log.type}
+                    </span>
+                  </div>
+
+                  {/* Lead Info */}
+                  <div className="mb-3">
+                    <div className="font-semibold text-harvest-700 text-sm">{log.lead?.fullName}</div>
+                    <div className="text-xs text-slate-500">{log.lead?.phone}</div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="mb-3 text-xs text-slate-600 bg-harvest-50 p-2 rounded">
+                    {getActivityDescription(log)}
+                  </div>
+
+                  {/* Updated By */}
+                  <div className="border-t border-harvest-100 pt-2">
+                    <div className="text-xs text-slate-700">
+                      <span className="font-medium">By:</span> {log.user?.name}
+                    </div>
+                    <div className="text-xs text-slate-500">{log.user?.role}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Pagination */}
