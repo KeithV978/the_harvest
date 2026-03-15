@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
               { label: "Lukewarm", icon: Thermometer, value: stats?.attendance?.lukewarm ?? 0, bg: "bg-yellow-50", text: "text-yellow-600", border: "border-yellow-200" },
               { label: "Hot Leads", icon: Flame, value: stats?.attendance?.hot ?? 0, bg: "bg-red-50", text: "text-red-600", border: "border-red-200" },
             ].map(card => (
-              <div key={card.label} className={`harvest-card p-4 border ${card.border}`}>
+              <div key={card.label} className={`harvest-card p-4 border bg-white shadow-md ${card.border}`}>
                 <div className={`inline-flex p-2 rounded-xl ${card.bg} ${card.text} mb-2`}>
                   <card.icon className="w-4 h-4" />
                 </div>
@@ -125,7 +125,7 @@ export default function AdminDashboardPage() {
           {/* Charts Row 1 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Lead Status */}
-            <div className="harvest-card p-6">
+            <div className="harvest-card p-6 bg-white">
               <h3 className="font-display font-semibold text-slate-900 mb-4">Lead Status Distribution</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
@@ -141,8 +141,8 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Soul State */}
-            <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-slate-900 mb-4">Soul State Overview</h3>
+            <div className="harvest-card p-6 bg-white">
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Leads Soul State Overview</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <PieChart>
                   <Pie data={soulData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3}>
@@ -160,8 +160,8 @@ export default function AdminDashboardPage() {
           {/* Charts Row 2 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Attendance */}
-            <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-slate-900 mb-4">Church Attendance Status</h3>
+            <div className="harvest-card p-6 bg-white">
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Lead Church Attendance Degree</h3>
               <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={attendanceData} barSize={40}>
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} />
@@ -177,8 +177,8 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Church Membership */}
-            <div className="harvest-card p-6">
-              <h3 className="font-display font-semibold text-slate-900 mb-4">Church Membership Summary</h3>
+            <div className="harvest-card p-6 bg-white">
+              <h3 className="font-display font-semibold text-slate-900 mb-4">Church Membership Overview</h3>
               {churchData.length === 0 ? (
                 <div className="h-52 flex items-center justify-center text-slate-400 text-sm">No church data yet</div>
               ) : (

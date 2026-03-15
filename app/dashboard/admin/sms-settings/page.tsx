@@ -120,7 +120,7 @@ const SMSSettingsPage = () => {
 
   // Save template
   const handleSave = async (templateType: string) => {
-    setLoading(true);
+    // setLoading(true);
     if (!formData.title.trim() || !formData.content.trim()) {
       setError("Title and content are required");
       return;
