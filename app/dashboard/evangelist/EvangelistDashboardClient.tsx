@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, TrendingUp, Users, Activity, CheckCircle } from "lucide-react";
+import { UserRoundPlus, TrendingUp, Users, Activity, CheckCircle } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 import AnnouncementsBanner from "@/components/AnnouncementsBanner";
 import AddLeadModal from "@/components/leads/AddLeadModal";
@@ -38,7 +38,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
           <p className="page-subtitle">Here's a summary of your harvest work</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="harvest-btn-primary w-full sm:w-auto">
-          <Plus className="w-4 h-4" /> Add Lead
+          <UserRoundPlus className="w-4 h-4" /> Add Lead
         </button>
       </div>
 
@@ -58,7 +58,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
       </div>
 
       {/* Recent leads */}
-      <div className="harvest-card overflow-hidden">
+      <div className="harvest-card">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100">
           <h2 className="font-display font-semibold text-slate-900">Recent Leads</h2>
           <Link href="/dashboard/evangelist/leads" className="text-sm text-harvest-600 hover:text-harvest-700 font-medium">

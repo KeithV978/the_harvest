@@ -102,7 +102,7 @@ export default function ActivityLogPage() {
               onClick={() => setIsFilterOpen((prev) => !prev)}
               className="w-full flex justify-between text-white bg-harvest-800 py-2 px-4 rounded-xl"
             >
-              <Filter className="w-4 h-4" />
+              <span className="flex gap-2 items-center"><Filter className="w-4 h-4" /> Filter</span>
               {isFilterOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
             </button>
           </div>
@@ -155,9 +155,9 @@ export default function ActivityLogPage() {
 
         {/* Activity Table & Card List */}
         {loading ? (
-          <div className="p-8 text-center text-slate-500">Loading activity logs...</div>
+          <div className="p-8 text-center text-slate-500 bg-white">Loading activity logs...</div>
         ) : activityLogs.length === 0 ? (
-          <div className="p-8 text-center text-slate-500">No activity found</div>
+          <div className="p-8 text-center text-slate-500 bg-white">No activity found</div>
         ) : (
           <>
             {/* Desktop Table View */}

@@ -79,7 +79,7 @@ export default function FollowupDashboardPage() {
           <h2 className="font-display font-semibold text-slate-900">My Assigned Leads</h2>
         </div>
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading...</div>
+          <div className="py-16 text-center text-slate-400 bg-white" >Loading...</div>
         ) : (
           <LeadTable
             leads={leads}

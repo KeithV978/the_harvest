@@ -33,7 +33,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-harvest-950 via-earth-900 to-harvest-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-white p-4">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full opacity-5"
             style={{
@@ -45,7 +45,7 @@ export default function SignupPage() {
 
       <div className="w-full max-w-md relative">
         <div className="text-center mb-8">
-          {/* <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-harvest-500 shadow-lg mb-4"> */}
+          {/* <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-earth-500 shadow-lg mb-4"> */}
             {/* <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity="0.9"/>
               <path d="M20 10C20 10 14 16 14 22C14 25.314 16.686 28 20 28C23.314 28 26 25.314 26 22C26 16 20 10 20 10Z" fill="white" opacity="0.3"/>
@@ -55,79 +55,80 @@ export default function SignupPage() {
 
         <div className="text-center mt-8  mb-4">
             {/* <h1 className="font-display text-3xl font-bold text-white mb-4">Get Started</h1> */}
-          {/* <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
+          {/* <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-earth-500 shadow-lg overflow-hidden mb-4">
             
             <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
           </div> */}
         </div>
-          <p className="text-white text-xl mt-1">Create Your Account</p>
+          <p className="text-slate-600 text-xl mt-1">Create Your Account</p>
         </div>
 
         <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
                 <input
                   type="text"
                   required
                   value={form.name}
                   onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   placeholder="John Doe"
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
                 <input
                   type="email"
                   required
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   placeholder="you@example.com"
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
-                Phone Number (Optional)
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                Phone Number
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
                 <input
+                required
                   type="tel"
                   value={form.phone}
                   onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                   placeholder="+234 XXX XXX XXXX"
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
                 />
               </div>
             </div>
 
              <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                Gender
               </label>
               <div className="relative">
-                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
+                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
                 <select 
                 required
                   value={form.gender}
                   onChange={e => setForm(f => ({ ...f, gender: e.target.value }))} 
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
                 >
-                  <option value="" className="text-harvest-400">Gender</option>
+                  <option value="" className="text-earth-400">Gender</option>
                   <option className="text-slate-600" value="MALE">Male</option>
                   <option className="text-slate-600" value="FEMALE">Female</option>
                 </select>
@@ -135,11 +136,11 @@ export default function SignupPage() {
             </div>
 
                <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
                 <input
                   type="password"
                   required
@@ -147,7 +148,7 @@ export default function SignupPage() {
                   value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                   placeholder="Min. 6 characters"
-                  className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
                 />
               </div>
             </div>
@@ -166,10 +167,10 @@ export default function SignupPage() {
                       key={opt.value}
                       type="button"
                       onClick={() => setForm(f => ({ ...f, role: opt.value }))}
-                      className={`rounded-xl p-3 text-left border transition-all flex items-start gap-2 ${
+                      className={`rounded-xl p-3 text-left transition-all flex items-start gap-2 ${
                         form.role === opt.value
-                          ? "bg-harvest-500/30 border-harvest-400 text-white"
-                          : "bg-white/5 border-white/10 text-harvest-300 hover:bg-white/10"
+                        ? "bg-earth-100 text-earth-500"
+                         : "bg-white text-earth-500"
                       }`}
                     >
                       <RoleIcon className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -184,7 +185,7 @@ export default function SignupPage() {
             </div>
 
             {error && (
-              <div className="bg-red-500/20 border border-red-400/30 rounded-xl px-4 py-3 flex items-center gap-2 text-red-300 text-sm">
+              <div className="bg-red-300/20 border border-red-400/30 rounded-xl px-4 py-3 flex items-center gap-2 text-red-500 text-sm">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -193,16 +194,16 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-harvest-500 hover:bg-harvest-400 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-lg shadow-harvest-500/30 flex items-center justify-center gap-2"
+              className="w-full bg-earth-500 hover:bg-earth-400 disabled:opacity-60 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-lg shadow-earth-500/30 flex items-center justify-center gap-2"
             >
               <LogIn className="w-4 h-4" />
               {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
-          <p className="text-center text-white text-sm mt-6">
+          <p className="text-center text-slate-400 text-sm mt-6">
             Already have an account?{" "}
-            <Link href="/auth/login" className="text-harvest-400 hover:text-harvest-300 font-semibold underline underline-offset-2">
+            <Link href="/auth/login" className="text-earth-400 hover:text-earth-300 font-semibold underline underline-offset-2">
               Sign in
             </Link>
           </p>

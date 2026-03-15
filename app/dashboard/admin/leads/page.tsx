@@ -1,9 +1,10 @@
 // app/dashboard/admin/leads/page.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { Search, Filter, ChevronDown, ChevronRight } from "lucide-react";
+import { Search, Filter, ChevronDown, ChevronRight, UserRoundPlus } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 import { LEAD_STATUS_LABELS, SOUL_STATE_LABELS } from "@/lib/utils";
+import AddLeadModal from "@/components/leads/AddLeadModal";
 
 export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<any[]>([]);
@@ -16,6 +17,7 @@ export default function AdminLeadsPage() {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -30,6 +32,10 @@ export default function AdminLeadsPage() {
     setLeads(data.leads ?? []);
     setTotal(data.total ?? 0);
     setLoading(false);
+  };
+  const handleLeadAdded = (newLead: any) => {
+    setLeads((prev) => [newLead, ...prev]);
+    setShowAddModal(false);
   };
 
   useEffect(() => {
@@ -47,9 +53,18 @@ export default function AdminLeadsPage() {
 
   return (
     <div className="py-8">
-      <div className="page-header">
-        <h1 className="page-title">All Leads</h1>
-        <p className="page-subtitle">{total} total leads in the system</p>
+      <div className="page-header w-full flex justify-between">
+        <div>
+          <h1 className="page-title">All Leads</h1>
+          <p className="page-subtitle">{total} total leads in the system</p>
+        </div>
+
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="harvest-btn-primary w-full sm:w-auto"
+        >
+          <UserRoundPlus className="w-4 h-4" /> Add Lead
+        </button>
       </div>
 
       <div className="harvest-card overflow-hidden">
@@ -60,12 +75,13 @@ export default function AdminLeadsPage() {
               onClick={() => setIsFilterOpen((prev) => !prev)}
               className={`w-full flex sm:justify-between md:justify-start text-white bg-harvest-500 py-2 px-4 rounded-xl `}
             >
-              Filters{" "}
-              {isFilterOpen ? <ChevronDown /> : <ChevronRight />}{" "}
+              Filters {isFilterOpen ? <ChevronDown /> : <ChevronRight />}{" "}
             </button>
           </div>
           {/* fields */}
-          <div className={`flex flex-col gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100 bg-white ${isFilterOpen ? "block" : "hidden"}`}>
+          <div
+            className={`flex flex-col gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100 bg-white ${isFilterOpen ? "block" : "hidden"}`}
+          >
             <div className="relative w-full">
               {/* <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" /> */}
               <input
@@ -77,14 +93,14 @@ export default function AdminLeadsPage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 flex-wrap">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 flex-wrap w-full">
               <select
                 value={statusFilter}
                 onChange={(e) => {
                   setStatusFilter(e.target.value);
                   setPage(1);
                 }}
-                className="harvest-select text-xs py-2 flex-1 sm:flex-none sm:w-36"
+                className="harvest-select text-xs py-2 flex-1 sm:flex-none w-full"
               >
                 <option value="">All Statuses</option>
                 {Object.entries(LEAD_STATUS_LABELS).map(([v, l]) => (
@@ -100,7 +116,7 @@ export default function AdminLeadsPage() {
                   setSoulFilter(e.target.value);
                   setPage(1);
                 }}
-                className="harvest-select text-xs py-2 flex-1 sm:flex-none sm:w-44"
+                className="harvest-select text-xs py-2 flex-1 sm:flex-none w-full"
               >
                 <option value="">All Soul States</option>
                 {Object.entries(SOUL_STATE_LABELS).map(([v, l]) => (
@@ -117,7 +133,7 @@ export default function AdminLeadsPage() {
                   setDateFrom(e.target.value);
                   setPage(1);
                 }}
-                className="harvest-input text-xs py-2 flex-1 sm:flex-none sm:w-36"
+                className="harvest-input text-xs py-2 flex-1 sm:flex-none w-full"
                 placeholder="From"
               />
               <input
@@ -127,7 +143,7 @@ export default function AdminLeadsPage() {
                   setDateTo(e.target.value);
                   setPage(1);
                 }}
-                className="harvest-input text-xs py-2 flex-1 sm:flex-none sm:w-36"
+                className="harvest-input text-xs py-2 flex-1 sm:flex-none w-full"
                 placeholder="To"
               />
 
@@ -150,7 +166,7 @@ export default function AdminLeadsPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-slate-400">
+          <div className="py-16 text-center text-slate-400 bg-white">
             Loading leads...
           </div>
         ) : (
@@ -208,6 +224,13 @@ export default function AdminLeadsPage() {
               </button>
             </div>
           </div>
+        )}
+
+        {showAddModal && (
+          <AddLeadModal
+            onClose={() => setShowAddModal(false)}
+            onSuccess={handleLeadAdded}
+          />
         )}
       </div>
     </div>

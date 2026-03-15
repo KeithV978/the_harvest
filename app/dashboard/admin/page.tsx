@@ -74,8 +74,8 @@ export default function AdminDashboardPage() {
 
         {/* Date filter */}
       <div>
-          <div className="w-full mb-2 bg-harvest-700 rounded-xl">
-            <button onClick={() => setIsFilterOpen(prev => !prev)} className="w-full flex justify-between text-white bg-harvest-800 py-2 px-4 rounded-xl">
+          <div className="w-full mb-2 bg-harvest-500 rounded-xl">
+            <button onClick={() => setIsFilterOpen(prev => !prev)} className="w-full flex justify-between text-white bg-harvest-500 py-2 px-4 rounded-xl">
               Date Filter {isFilterOpen ?  <ChevronDown /> : <ChevronRight />} </button>
           </div>
 

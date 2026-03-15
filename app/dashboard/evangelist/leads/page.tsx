@@ -1,7 +1,7 @@
 // app/dashboard/evangelist/leads/page.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { Plus, Search, Filter } from "lucide-react";
+import { UserRoundPlus, Search, Filter } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 import AddLeadModal from "@/components/leads/AddLeadModal";
 
@@ -39,12 +39,12 @@ export default function EvangelistLeadsPage() {
           <p className="page-subtitle">{total} leads added by you</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="harvest-btn-primary w-full sm:w-auto">
-          <Plus className="w-4 h-4" /> Add Lead
+          <UserRoundPlus className="w-4 h-4" /> Add Lead
         </button>
       </div>
 
       <div className="harvest-card overflow-hidden">
-        <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-harvest-100">
+        <div className="flex items-center gap-3 py-4 border-b border-harvest-100">
           <div className="relative flex-1">
             {/* <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" /> */}
             <input
@@ -58,7 +58,7 @@ export default function EvangelistLeadsPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading leads...</div>
+          <div className="py-16 text-center text-slate-400 bg-white">Loading leads...</div>
         ) : (
           <LeadTable
             leads={filtered}

@@ -38,7 +38,7 @@ export default function LeadTable({ leads, showAssignedTo = true, showAddedBy = 
 
   if (leads.length === 0) {
     return (
-      <div className="py-16 text-center">
+      <div className="py-16 text-center bg-white">
         <div className="text-4xl mb-3">🌾</div>
         <p className="text-slate-400 text-sm">No leads yet. The harvest awaits!</p>
       </div>

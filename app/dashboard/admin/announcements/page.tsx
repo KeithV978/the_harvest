@@ -1,7 +1,7 @@
 // app/dashboard/admin/announcements/page.tsx
 "use client";
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Edit2, X } from "lucide-react";
+import { CirclePlus, Trash2, Edit2, X } from "lucide-react";
 import { set } from "date-fns";
 
 interface Announcement {
@@ -172,12 +172,12 @@ const AnnouncementsPage = () => {
           }}
           className="harvest-btn-primary flex items-center gap-2"
         >
-          <Plus size={20} /> New Announcement
+          <CirclePlus size={20} /> New Announcement
         </button>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-500/20 text-red-200 rounded-lg">
+        <div className="mb-4 p-3 bg-red-200/20 text-red-500 rounded-lg">
           {error}
         </div>
       )}
@@ -189,9 +189,11 @@ const AnnouncementsPage = () => {
       )}
 
       {loading ? (
-        <div className="text-center py-12">Loading...</div>
+        <div className="text-center py-12 bg-white rounded-lg">
+          Loading...
+        </div>
       ) : announcements.length === 0 ? (
-        <div className="text-center py-12 text-slate-400">
+        <div className="text-center py-12 text-slate-400 bg-white rounded-lg">
           No announcements yet. Create one to get started!
         </div>
       ) : (

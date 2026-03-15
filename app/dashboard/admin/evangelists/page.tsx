@@ -32,9 +32,9 @@ export default function EvangelistsPage() {
 
       <div className="harvest-card overflow-hidden">
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading...</div>
+          <div className="py-16 text-center text-slate-400 bg-white">Loading...</div>
         ) : users.length === 0 ? (
-          <div className="py-16 text-center">
+          <div className="py-16 text-center bg-white">
             <Users className="w-8 h-8 text-slate-300 mx-auto mb-2" />
             <p className="text-slate-400 text-sm">No evangelists yet</p>
           </div>
