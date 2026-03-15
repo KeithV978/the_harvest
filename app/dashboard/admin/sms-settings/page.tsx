@@ -240,7 +240,7 @@ const SMSSettingsPage = () => {
               : "border-transparent text-slate-600 hover:text-slate-900"
           }`}
         >
-          <Copy size={18} /> SMS Templates
+          <Copy size={16} /> SMS Templates
         </button>
         <button
           onClick={() => setActiveTab("users")}
@@ -250,7 +250,7 @@ const SMSSettingsPage = () => {
               : "border-transparent text-slate-600 hover:text-slate-900"
           }`}
         >
-          <Phone size={18} /> Admin Phone Numbers
+          <Phone size={16} /> Admin Phone Numbers
         </button>
       </div>
 
