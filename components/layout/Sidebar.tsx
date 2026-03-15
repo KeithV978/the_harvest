@@ -239,7 +239,7 @@ export default function Sidebar() {
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="h-[95%]">{sidebarContent}</div>
+        <div className="h-[90%]">{sidebarContent}</div>
       </aside>
     </>
   );

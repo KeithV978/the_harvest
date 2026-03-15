@@ -44,7 +44,7 @@ const FollowupTable = ({ followups }: { followups: any[] }) => {
           {followups.map((user) => (
             <div
               key={user.id}
-              className="p-4 bg-white border border-blue-100 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-colors"
+              className="p-4 bg-white shadow-sm hover:shadow-md border border-blue-100 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-colors"
             >
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex items-center gap-3 flex-1">

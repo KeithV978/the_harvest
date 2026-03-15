@@ -212,7 +212,7 @@ export default function ActivityLogPage() {
                     setSelectedLog(log);
                     setShowDetailModal(true);
                   }}
-                  className="bg-white border border-harvest-200 rounded-lg p-4 hover:bg-harvest-50 cursor-pointer transition-colors"
+                  className="bg-white shadow-sm hover:shadow-md border border-harvest-200 rounded-lg p-4 hover:bg-harvest-50 cursor-pointer transition-colors"
                 >
                   {/* Timestamp & Activity Type */}
                   <div className="flex justify-between items-start mb-3">

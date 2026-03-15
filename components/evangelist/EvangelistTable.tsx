@@ -46,7 +46,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
         {evangelists.map((user) => (
           <div
             key={user.id}
-            className="p-4 bg-white border border-harvest-100 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors"
+            className="p-4 bg-white shadow-sm hover:shadow-md border border-harvest-100 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="flex items-center gap-3 flex-1">

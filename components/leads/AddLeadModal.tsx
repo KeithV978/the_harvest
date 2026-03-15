@@ -67,13 +67,13 @@ export default function AddLeadModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm">
       <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-2xl max-h-[90vh] overflow-y-auto animate-fadeIn">
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-harvest-100">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-harvest-50">
           <h2 className="font-display font-bold text-slate-900 text-lg sm:text-xl">
             Add New Lead
           </h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-harvest-50 text-slate-400"
+            className="p-2 rounded-xl bg-harvest-500 text-white text-slate-400"
           >
             <X className="w-5 h-5" />
           </button>

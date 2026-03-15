@@ -120,14 +120,14 @@ export default function LeadDetailModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-fadeIn">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-harvest-100 sticky top-0 bg-white z-10">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-xl bg-harvest-100 flex items-center justify-center text-harvest-700 font-bold text-sm sm:text-base flex-shrink-0">
               {lead.fullName[0]}
             </div>
             <div className="min-w-0">
               <h2 className="font-display font-bold text-slate-900 text-sm sm:text-base truncate">{lead.fullName}</h2>
-              <div className="flex items-center gap-1 sm:gap-2 mt-0.5 flex-wrap">
+              <div className="flex items-center gap-1 sm:gap-2 mt-0.5 flex-wrap md  :hidden sm:flex-nowrap  ">
                 <span className={cn("badge text-xs",
                   lead.status === "NEW_LEAD" ? "badge-new" :
                   lead.status === "FOLLOWING_UP" ? "badge-following" : "badge-converted"
@@ -186,7 +186,7 @@ export default function LeadDetailModal({
                 ].map(item => (
                   <div key={item.label}>
                     <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">{item.label}</div>
-                    <div className="text-sm text-slate-800 mt-0.5 font-medium">{item.value}</div>
+                    <div className="text-sm text-slate-700 mt-0.5 font-medium">{item.value}</div>
                   </div>
                 ))}
 
