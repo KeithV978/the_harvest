@@ -34,11 +34,31 @@ export async function POST(
     });
 
     if (!result.success) {
+      // Update the SMS log with failure details
+      await prisma.sMSLog.update({
+        where: { id: smsLogId },
+        data: {
+          status: "FAILED",
+          errorMessage: result.error || "Failed to retry SMS",
+          sentAt: null,
+        },
+      });
+
       return Response.json(
         { error: result.error || "Failed to retry SMS" },
         { status: 500 }
       );
     }
+
+    // Update the SMS log to mark as sent
+    await prisma.sMSLog.update({
+      where: { id: smsLogId },
+      data: {
+        status: "SENT",
+        sentAt: new Date(),
+        errorMessage: null,
+      },
+    });
 
     return Response.json({
       success: true,
