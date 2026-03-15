@@ -305,7 +305,7 @@ export default function LeadDetailModal({
                   </div>
                 </div>
 
-                <div className={`flex flex-row sm:flex-row gap-2 sm:gap-3 pt-2 `}>
+                <div className={`flex flex-row sm:flex-row gap-1 sm:gap-2 pt-2 `}>
                   <button type="button" onClick={handleSave} disabled={saving} className="harvest-btn-primary flex-1 justify-center disabled:opacity-60 text-sm">
                     <Check className="w-4 h-4" /> {saving ? "Saving..." : "Save Changes"}
                   </button>
