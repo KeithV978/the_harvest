@@ -225,7 +225,7 @@ export default function LeadDetailModal({
               <div className="space-y-3 sm:space-y-4">
                 {!isFollowup && (
                   <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
                       <div className="col-span-2">
                         <label className="harvest-label">Full Name</label>
                         <input value={editForm.fullName} onChange={e => setEditForm((f: any) => ({...f, fullName: e.target.value}))} className="harvest-input" />
@@ -284,13 +284,14 @@ export default function LeadDetailModal({
                 <div className={`border-t border-harvest-100 pt-3 sm:pt-4 ${role === "EVANGELIST" ? "hidden" : "flex"}`}>
                   <div className="font-semibold text-slate-800 text-xs sm:text-sm mb-2 sm:mb-3">⛪ Church Follow-Up Info</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                    <div>
+                    <div className="">
                       <label className="harvest-label">Church Membership</label>
                       <select value={editForm.churchMembership} onChange={e => setEditForm((f: any) => ({...f, churchMembership: e.target.value}))} className="harvest-select">
                         <option value="">None</option>
                         {CHURCHES.map(v => <option key={v} value={v}>{CHURCH_LABELS[v as keyof typeof CHURCH_LABELS]}</option>)}
                       </select>
                     </div>
+                    
                     <div>
                       <label className="harvest-label">Months Consistent</label>
                       <input type="number" min={0} max={24} value={editForm.monthsConsistent} onChange={e => setEditForm((f: any) => ({...f, monthsConsistent: parseInt(e.target.value) || 0}))} className="harvest-input" />
@@ -304,11 +305,11 @@ export default function LeadDetailModal({
                   </div>
                 </div>
 
-                <div className={`flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2 `}>
-                  <button type="button" onClick={() => setEditing(false)} className="harvest-btn-secondary flex-1 text-sm">Cancel</button>
+                <div className={`flex flex-row sm:flex-row gap-2 sm:gap-3 pt-2 `}>
                   <button type="button" onClick={handleSave} disabled={saving} className="harvest-btn-primary flex-1 justify-center disabled:opacity-60 text-sm">
                     <Check className="w-4 h-4" /> {saving ? "Saving..." : "Save Changes"}
                   </button>
+                  <button type="button" onClick={() => setEditing(false)} className="harvest-btn-secondary flex-1 text-sm text-center">Cancel</button>
                 </div>
               </div>
             )}

@@ -30,14 +30,14 @@ export default function FollowupLeadsPage() {
   const totalPages = Math.ceil(total / 10);
 
   return (
-    <div className="mt-12">
+    <div className="mt-6">
       <div className="page-header">
         <h1 className="page-title">Assigned Leads</h1>
         <p className="page-subtitle">{total} leads assigned to you</p>
       </div>
 
       <div className="harvest-card overflow-hidden">
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-harvest-100">
+        <div className="flex items-center gap-3 py-4 border-b border-harvest-100">
           <div className="relative flex-1 max-w-sm">
             {/* <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-400" /> */}
             <input
@@ -45,7 +45,7 @@ export default function FollowupLeadsPage() {
               placeholder="Search leads..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="harvest-input pl-9"
+              className="harvest-input pl-9 w-full"
             />
           </div>
         </div>

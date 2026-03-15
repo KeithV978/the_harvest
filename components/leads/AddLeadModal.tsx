@@ -1,7 +1,7 @@
 // components/leads/AddLeadModal.tsx
 "use client";
 import { useState } from "react";
-import { X, AlertCircle, Plus } from "lucide-react";
+import { CircleX, X, AlertCircle, UserRoundPlus } from "lucide-react";
 
 const AGE_RANGES = [
   { value: "UNDER_18", label: "Under 18" },
@@ -83,7 +83,7 @@ export default function AddLeadModal({
           onSubmit={handleSubmit}
           className="p-4 sm:p-6 space-y-4 sm:space-y-5"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="col-span-2">
               <label className="harvest-label">Full Name *</label>
               <input
@@ -132,6 +132,20 @@ export default function AddLeadModal({
               </select>
             </div>
 
+
+            <div className="col-span-2">
+              <label className="harvest-label">Phone</label>
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, phone: e.target.value }))
+                }
+                placeholder="+234..."
+                className="harvest-input"
+              />
+            </div>
+
             <div>
               <label className="harvest-label">Soul State *</label>
               <select
@@ -147,19 +161,6 @@ export default function AddLeadModal({
                   </option>
                 ))}
               </select>
-            </div>
-
-            <div>
-              <label className="harvest-label">Phone</label>
-              <input
-                type="tel"
-                value={form.phone}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, phone: e.target.value }))
-                }
-                placeholder="+234..."
-                className="harvest-input"
-              />
             </div>
 
             <div>
@@ -211,21 +212,23 @@ export default function AddLeadModal({
           )}
 
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
+               <button
+              type="submit"
+              disabled={loading}
+              className="harvest-btn-primary flex-1 justify-center disabled:opacity-60 gap-2 text-sm"
+            >
+              <UserRoundPlus className="w-4 h-4" />
+              {loading ? "Adding..." : "Add Lead"}
+            </button>
+
             <button
               type="button"
               onClick={onClose}
               className="harvest-btn-secondary flex-1 justify-center text-sm"
             >
-              <X className="w-4 h-4" /> Cancel
+              <CircleX className="w-4 h-4" /> Cancel
             </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="harvest-btn-primary flex-1 justify-center disabled:opacity-60 gap-2 text-sm"
-            >
-              <Plus className="w-4 h-4" />
-              {loading ? "Adding..." : "Add Lead"}
-            </button>
+        
           </div>
         </form>
       </div>

@@ -130,7 +130,7 @@ export default function LeadTable({ leads, showAssignedTo = true, showAddedBy = 
             <div
               key={lead.id}
               onClick={() => setSelectedLead(lead)}
-              className="p-4 bg-white border border-harvest-100 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 cursor-pointer transition-colors"
+              className="p-4 bg-white shadow-md hover:shadow-lg border border-slate-100 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 cursor-pointer transition-colors"
             >
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex-1">

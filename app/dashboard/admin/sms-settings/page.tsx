@@ -234,7 +234,7 @@ const SMSSettingsPage = () => {
       <div className="flex gap-2 mb-6 border-b border-slate-200">
         <button
           onClick={() => setActiveTab("templates")}
-          className={`flex items-center gap-1 md:gap-2 md:px-4 md:py-3 border-b-2 transition ${
+          className={`flex items-center gap-[.5rem] md:px-4 md:py-3 border-b-2 transition ${
             activeTab === "templates"
               ? "border-harvest-500 text-harvest-600"
               : "border-transparent text-slate-600 hover:text-slate-900"
@@ -244,7 +244,7 @@ const SMSSettingsPage = () => {
         </button>
         <button
           onClick={() => setActiveTab("users")}
-          className={`flex items-center gap-1 md:gap-2 md:px-4 md:py-3 border-b-2 transition ${
+          className={`flex items-center gap-[.5rem] md:px-4 md:py-3 border-b-2 transition ${
             activeTab === "users"
               ? "border-harvest-500 text-harvest-600"
               : "border-transparent text-slate-600 hover:text-slate-900"

@@ -13,8 +13,7 @@ import {
   LogOut,
   ChevronRight,
   Menu,
-  X,
-  CircleX,
+  X, 
   Settings,
   Megaphone,
   User,
@@ -103,11 +102,11 @@ export default function Sidebar() {
   };
 
   const sidebarContent = (
-    <div className="flex justify-between h-full flex-col items-center border-b border-harvest-100">
+    <div className="flex justify-between h-full flex-col items-center">
       <div className="w-full">
         <div className="flex justify-between mt-4 items-center">
           {/* Logo */}
-          <div className="flex items-center gap-3 px-6 pb-5 border-b border-harvest-100">
+          <div className="flex items-center gap-3 px-6 pb-5">
             <img
               src="/applogo.jpg"
               alt="The Harvest Logo"
@@ -124,9 +123,9 @@ export default function Sidebar() {
           <div className="pb-4 px-4 md:hidden">
             <button
               onClick={() => handleNavClick()}
-              className="bg-harvest-400 text-earth-700  p-2 rounded-xl"
+              className="bg-harvest-400 text-white  p-2 rounded-xl"
             >
-              <CircleX className="" />
+              <X className="" />
             </button>
           </div>
         </div>
@@ -162,7 +161,7 @@ export default function Sidebar() {
       </div>
 
       {/* User */}
-      <div className="w-full p-4 border-t border-harvest-100">
+      <div className="w-full p-4">
         {/* <div> */}
 
         {/* 1 */}
@@ -193,15 +192,15 @@ export default function Sidebar() {
 
         {/* </div> */}
         {/* 2 */}
-        <div className="w-full flex items-center gap-3 px-3 py-2 my-2 rounded-xl hover:bg-harvest-100">
+        <div className="w-full flex items-center gap-3 px-3 py-2 rounded-xl ">
           <div className="flex-1 min-w-0 mt-2 sm:block">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/login" })}
-              className="flex gap-2 items-center w-full justify-between text-sm rounded-lg text-harvest-600"
+              className="flex gap-2 items-center text-sm rounded-lg text-slate-600 hover:bg-harvest-100 transition-all px-3 py-2"
               title="Sign out"
             >
-              Log Out
               <LogOut className="w-4 h-4 text-slate-600" />
+              Log Out
             </button>
           </div>
         </div>
@@ -214,7 +213,7 @@ export default function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-harvest-400 rounded-xl hover:bg-harvest-50 text-earth-700"
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-harvest-400 rounded-xl hover:bg-harvest-50 text-white"
       >
         {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -228,14 +227,14 @@ export default function Sidebar() {
       )}
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-harvest-100 min-h-screen">
+      <aside className="hidden lg:flex flex-col w-64 bg-white min-h-screen">
         {sidebarContent}
       </aside>
 
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-harvest-100 flex flex-col transition-transform duration-300 ease-out",
+          "lg:hidden fixed top-0 left-0 z-40 w-64 h-screen bg-white flex flex-col transition-transform duration-300 ease-out",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >

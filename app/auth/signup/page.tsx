@@ -55,22 +55,22 @@ export default function SignupPage() {
 
         <div className="text-center mt-8  mb-4">
             {/* <h1 className="font-display text-3xl font-bold text-white mb-4">Get Started</h1> */}
-          <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
+          {/* <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-harvest-500 shadow-lg overflow-hidden mb-4">
             
             <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
-          </div>
+          </div> */}
         </div>
-          <p className="text-harvest-300 text-sm mt-1">Create your account</p>
+          <p className="text-white text-xl mt-1">Create Your Account</p>
         </div>
 
         <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
                 <input
                   type="text"
                   required
@@ -83,11 +83,11 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
                 <input
                   type="email"
                   required
@@ -100,11 +100,11 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                 Phone Number (Optional)
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
                 <input
                   type="tel"
                   value={form.phone}
@@ -116,18 +116,18 @@ export default function SignupPage() {
             </div>
 
              <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                Gender
               </label>
               <div className="relative">
-                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
                 <select 
                 required
                   value={form.gender}
                   onChange={e => setForm(f => ({ ...f, gender: e.target.value }))} 
                   className="w-full bg-white/10 border border-white/20 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
                 >
-                  <option value="">Gender</option>
+                  <option value="" className="text-harvest-400">Gender</option>
                   <option className="text-slate-600" value="MALE">Male</option>
                   <option className="text-slate-600" value="FEMALE">Female</option>
                 </select>
@@ -135,7 +135,7 @@ export default function SignupPage() {
             </div>
 
                <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -152,7 +152,7 @@ export default function SignupPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-harvest-200 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-1.5">
                 Role
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -200,7 +200,7 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <p className="text-center text-harvest-300 text-sm mt-6">
+          <p className="text-center text-white text-sm mt-6">
             Already have an account?{" "}
             <Link href="/auth/login" className="text-harvest-400 hover:text-harvest-300 font-semibold underline underline-offset-2">
               Sign in

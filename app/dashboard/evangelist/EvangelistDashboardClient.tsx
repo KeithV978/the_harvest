@@ -47,7 +47,7 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(card => (
-          <div key={card.label} className={`harvest-card p-5 border ${card.border}`}>
+          <div key={card.label} className={`harvest-card p-5 border bg-white shadow-lg`}>
             <div className={`inline-flex p-2 rounded-xl ${card.color} mb-3`}>
               <card.icon className="w-5 h-5" />
             </div>

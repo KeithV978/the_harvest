@@ -32,7 +32,7 @@ body {
 
 /* Custom classes */
 .harvest-card {
-  @apply bg-white rounded-2xl border border-harvest-100 shadow-sm;
+  @apply rounded-2xl shadow-sm;
 }
 
 .harvest-btn {
@@ -52,7 +52,7 @@ body {
 }
 
 .harvest-input {
-  @apply w-full rounded-xl border border-harvest-200 bg-white hover:bg-white px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
+  @apply w-full min-w-[50%] rounded-xl border border-harvest-200 bg-white hover:bg-white px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
 }
 
 .harvest-label {

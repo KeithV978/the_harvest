@@ -57,7 +57,7 @@ export default function LoginPage() {
             </svg> */}
             <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
           </div>
-          <p className="text-harvest-300 text-sm mt-1">Sign in to your account</p>
+          <p className="text-white text-sm mt-1">Sign in to your account</p>
         </div>
 
         {/* Card */}
@@ -122,7 +122,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <p className="text-center text-harvest-600 text-xs mt-4">
+        <p className="text-center text-slate-600 text-xs mt-4">
           Forgot Password? <Link href="/auth/forgot-password" className="text-harvest-400 hover:text-harvest-300 font-semibold underline underline-offset-2">Reset it</Link>
         </p>
       </div>

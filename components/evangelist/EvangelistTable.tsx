@@ -46,7 +46,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
         {evangelists.map((user) => (
           <div
             key={user.id}
-            className="p-4 bg-white shadow-sm hover:shadow-md border border-harvest-100 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors"
+            className="p-4 bg-white shadow-md hover:shadow-lg border border-slate-200 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="flex items-center gap-3 flex-1">
@@ -55,21 +55,21 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
                 </div>
                 <div className="min-w-0">
                   <div className="font-semibold text-earth-900 truncate">{user.name}</div>
-                  <div className="text-xs text-earth-400 truncate">{user.email}</div>
+                  <div className="text-xs text-slate-400 truncate">{user.email}</div>
                 </div>
               </div>
             </div>
             
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-earth-500">Leads Added</span>
-                <span className="badge bg-harvest-100 text-harvest-700">
+                <span className="text-slate-500">Leads Added</span>
+                <span className="badge bg-slate-100 text-harvest-700">
                   {user._count?.addedLeads ?? 0} leads
                 </span>
               </div>
               <div className="flex justify-between pt-2 border-t border-harvest-100">
-                <span className="text-earth-500">Joined</span>
-                <span className="text-earth-400 text-xs">{format(new Date(user.createdAt), "MMM d, yyyy")}</span>
+                <span className="text-slate-500">Joined</span>
+                <span className="text-slate-400 text-xs">{format(new Date(user.createdAt), "MMM d, yyyy")}</span>
               </div>
             </div>
           </div>

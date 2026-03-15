@@ -95,18 +95,18 @@ export default function FollowupProfilePage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen" bg-white>
         <div className="text-slate-400">Loading profile...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen mt-6 py-4 md:p-8">
+    <div className="min-h-screen mt-6 py-4 md:p-8 bg-white">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-600">
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <h1 className="text-2xl md:text-3xl text-center font-bold text-harvest-400 rounded-lg overflow-hidden">
             Edit Profile
           </h1>
         </div>
