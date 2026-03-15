@@ -61,7 +61,7 @@ export default function AdminLeadsPage() {
 
         <button
           onClick={() => setShowAddModal(true)}
-          className="harvest-btn-primary w-full sm:w-auto"
+          className="harvest-btn-primary w-fit sm:w-auto"
         >
           <UserRoundPlus className="w-4 h-4" /> Add Lead
         </button>

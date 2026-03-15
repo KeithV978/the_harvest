@@ -4,6 +4,9 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.ico",
+  },
   title: "The Harvest",
   description: "Lead tracking for the harvest",
 };
