@@ -13,12 +13,13 @@ import {
   LogOut,
   ChevronRight,
   Menu,
-  X, 
+  X,
   Settings,
   Megaphone,
   User,
   MessageSquare,
   ActivitySquare,
+  Wheat,
 } from "lucide-react";
 
 interface NavItem {
@@ -107,16 +108,22 @@ export default function Sidebar() {
         <div className="flex justify-between mt-4 items-center">
           {/* Logo */}
           <div className="flex items-center gap-3 px-6 pb-5">
-            <img
+            {/* <img
               src="/applogo.jpg"
               alt="The Harvest Logo"
               className="w-auto h-14"
-            />
-            <div className="hidden sm:block">
+            /> */}
+            {/* <div className="hidden sm:block">
               <h1 className="font-display font-bold text-earth-900 text-lg leading-tight">
                 The Harvest
               </h1>
-            </div>
+            </div> */}
+            <span className="flex gap-2 w-fit mx-auto items-center justify-center">
+              <Wheat className="w-4 h-4 text-earth-500 mx-auto mb-2" />
+              <h1 className="text-lg w-fit font-bold text-transparent bg-clip-text bg-gradient-to-r from-earth-300 to-earth-600">
+                The Harvest
+              </h1>
+            </span>
           </div>
 
           {/* Close Btn */}
