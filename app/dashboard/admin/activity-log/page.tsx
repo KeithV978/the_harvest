@@ -180,7 +180,7 @@ export default function ActivityLogPage() {
                         setSelectedLog(log);
                         setShowDetailModal(true);
                       }}
-                      className={`border-b border-harvest-100 hover:bg-harvest-50 cursor-pointer transition-colors ${idx % 2 === 0 ? "bg-white" : "bg-harvest-50/30"}`}
+                      className={`hover:bg-harvest-50 cursor-pointer transition-colors ${idx % 2 === 0 ? "bg-white" : "bg-harvest-50/30"}`}
                     >
                       <td className="px-4 py-3 text-slate-600">{format(new Date(log.createdAt), "MMM d, HH:mm")}</td>
                       <td className="px-4 py-3 font-medium text-slate-800">

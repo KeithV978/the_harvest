@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
               { label: "Lukewarm", icon: Thermometer, value: stats?.attendance?.lukewarm ?? 0, bg: "bg-yellow-50", text: "text-yellow-600", border: "border-yellow-200" },
               { label: "Hot Leads", icon: Flame, value: stats?.attendance?.hot ?? 0, bg: "bg-red-50", text: "text-red-600", border: "border-red-200" },
             ].map(card => (
-              <div key={card.label} className={`harvest-card p-4 border bg-white shadow-md ${card.border}`}>
+              <div key={card.label} className={`harvest-card p-4 bg-white shadow-md`}>
                 <div className={`inline-flex p-2 rounded-xl ${card.bg} ${card.text} mb-2`}>
                   <card.icon className="w-4 h-4" />
                 </div>

@@ -6,7 +6,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
     <>
       {/* Desktop Table View */}
       <div className="hidden lg:block w-full overflow-x-auto">
-      <table className="harvest-table min-w-full">
+      <table className="harvest-table min-w-full bg-white shadow-md rounded-xl border border-slate-200">
       <thead>
         <tr>
           <th>Name</th>

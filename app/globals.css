@@ -98,10 +98,10 @@ body {
   @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-150;
 }
 .sidebar-link-active {
-  @apply bg-harvest-500 text-white shadow-sm;
+  @apply bg-earth-500 text-white shadow-sm;
 }
 .sidebar-link-inactive {
-  @apply text-slate-700 hover:bg-harvest-50 hover:text-harvest-700;
+  @apply text-slate-700 hover:bg-earth-50 hover:text-earth-700;
 }
 
 /* Mobile sidebar responsive */
@@ -119,7 +119,7 @@ body {
   @apply font-display text-xl sm:text-2xl font-bold text-slate-900;
 }
 .page-subtitle {
-  @apply text-xs sm:text-sm  text-harvest-500 mt-1;
+  @apply text-xs sm:text-sm  text-slate-500 mt-1;
 }
 
 /* Responsive table */
