@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Mail, Lock, LogIn, AlertCircle } from "lucide-react";
+import { Mail, Lock, LogIn, AlertCircle, Wheat } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -49,15 +49,21 @@ export default function LoginPage() {
         {/* Logo / Header */}
         <div className="text-center mb-8">
             {/* <h1 className="font-display text-3xl font-bold text-white mb-4">Welcome Back</h1> */}
-          <div className="inline-flex items-center justify-center w-24 h-25 rounded-2xl bg-earth-500 shadow-lg overflow-hidden mb-4">
+          <div className="inline-flex items-center justify-center mb-4">
             {/* <svg viewBox="0 0 40 40" fill="none" className="w-9 h-9 text-white" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4C20 4 8 12 8 22C8 28.627 13.373 34 20 34C26.627 34 32 28.627 32 22C32 12 20 4 20 4Z" fill="currentColor" opacity="0.9"/>
               <path d="M20 10C20 10 14 16 14 22C14 25.314 16.686 28 20 28C23.314 28 26 25.314 26 22C26 16 20 10 20 10Z" fill="white" opacity="0.3"/>
               <path d="M20 34V38M17 36H23" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg> */}
-            <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" />
+            {/* <img src="/applogo.jpg" alt="The Harvest Logo" className="w-full h-full object-cover" /> */}
+          <span className="flex gap-2 w-fit mx-auto items-center justify-center">
+            <Wheat className="w-6 h-6 text-earth-500 mx-auto mb-2" />
+            <h1 className="text-3xl w-fit font-bold text-transparent bg-clip-text bg-gradient-to-r from-earth-300 to-earth-600">
+              The Harvest
+            </h1>
+          </span>
           </div>
-          <p className="text-earth-400 text-sm mt-1">Sign in to your account</p>
+          <p className="text-slate-400 text-sm mt-1">Sign in to your account</p>
         </div>
 
         {/* Card */}
