@@ -59,7 +59,7 @@ export default function LoginPage() {
           <span className="flex gap-2 w-fit mx-auto items-center justify-center">
             <Wheat className="w-6 h-6 text-earth-500 mx-auto mb-2" />
             <h1 className="text-3xl w-fit font-bold text-transparent bg-clip-text bg-gradient-to-r from-earth-300 to-earth-600">
-              The Harvest
+              TLAC Harvest
             </h1>
           </span>
           </div>
