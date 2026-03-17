@@ -32,10 +32,10 @@ export default function FollowupsPage() {
 
       <div className="harvest-card overflow-hidden">
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading...</div>
+          <div className="py-16 text-center text-slate-400 bg-white">Loading...</div>
         ) : users.length === 0 ? (
           <div className="py-16 text-center">
-            <UserCheck className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+            <UserCheck className="w-8 h-8 text-slate-300 mx-auto mb-2 bg-white" />
             <p className="text-slate-400 text-sm">No follow-up members yet</p>
           </div>
         ) : (

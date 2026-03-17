@@ -1,7 +1,23 @@
-import { format } from "date-fns"; 
+'use client';
 
+import { useState } from "react";
+import { format } from "date-fns";
+import AddedLeadsModal from "./AddedLeadsModal";
 
 const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openLeadsModal = (user: any) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
+
+  const closeLeadsModal = () => {
+    setIsModalOpen(false);
+    setSelectedUser(null);
+  };
+
   return (
     <>
       {/* Desktop Table View */}
@@ -11,13 +27,18 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Phone</th>
           <th>Leads Added</th>
           <th>Joined</th>
         </tr>
       </thead>
       <tbody>
         {evangelists.map((user) => (
-          <tr key={user.id}>
+          <tr 
+            key={user.id}
+            onClick={() => openLeadsModal(user)}
+            className="cursor-pointer hover:bg-harvest-50 transition"
+          >
             <td>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-harvest-100 flex items-center justify-center text-harvest-700 font-bold text-sm">
@@ -27,6 +48,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
               </div>
             </td>
             <td className="text-earth-600">{user.email}</td>
+            <td className="text-earth-600">{user.phone}</td>
             <td>
               <span className="badge bg-harvest-100 text-harvest-700">
                 {user._count?.addedLeads ?? 0} leads
@@ -46,7 +68,8 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
         {evangelists.map((user) => (
           <div
             key={user.id}
-            className="p-4 bg-white shadow-md hover:shadow-lg border border-slate-200 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors"
+            onClick={() => openLeadsModal(user)}
+            className="p-4 bg-white shadow-md hover:shadow-lg border border-slate-200 rounded-xl hover:border-harvest-300 hover:bg-harvest-50 transition-colors cursor-pointer"
           >
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="flex items-center gap-3 flex-1">
@@ -75,6 +98,13 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
           </div>
         ))}
       </div>
+
+      {/* Added Leads Modal */}
+      <AddedLeadsModal 
+        user={selectedUser}
+        isOpen={isModalOpen}
+        onClose={closeLeadsModal}
+      />
     </>
   );
 };
