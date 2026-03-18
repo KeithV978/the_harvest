@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { LeadStatus, SMSType } from "@prisma/client";
 import { sendSMS, getSMSTemplate, renderTemplate } from "@/lib/sms";
 import { logFieldChange, logStatusChange, logAssignment } from "@/lib/audit";
+import { sendPushToUser, configureWebPush } from "@/lib/push";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
@@ -15,8 +16,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   const lead = await prisma.lead.findUnique({
     where: { id: params.id },
     include: {
-      addedBy: { select: { id: true, name: true, email: true } },
-      assignedTo: { select: { id: true, name: true, email: true } },
+      addedBy: { select: { id: true, name: true, phone: true, email: true } },
+      assignedTo: { select: { id: true, name: true, phone: true, email: true } },
       notes: {
         include: { user: { select: { id: true, name: true } } },
         orderBy: { createdAt: "asc" },
@@ -130,6 +131,29 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     } catch (smsError) {
       console.error("Error sending followup assignment SMS:", smsError);
       // Don't fail the request if SMS sending fails
+    }
+
+    // Send push notification to assigned followup member
+    if (updated.assignedToId) {
+      try {
+        configureWebPush();
+        await sendPushToUser(
+          updated.assignedToId,
+          {
+            title: 'New Lead Assignment',
+            body: `You have been assigned ${updated.fullName} from ${updated.location}`,
+            tag: `lead-assignment-${updated.id}`,
+            data: {
+              url: `/dashboard/followup/leads/${updated.id}`,
+              leadId: updated.id,
+            },
+          },
+          prisma
+        );
+      } catch (pushError) {
+        console.error('Error sending assignment push notification:', pushError);
+        // Don't fail the request if push fails
+      }
     }
   }
 

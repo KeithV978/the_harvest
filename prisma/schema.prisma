@@ -83,7 +83,9 @@ model User {
   gender        Gender?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  lastActivity  DateTime  @default(now())  // Track when user was last active for inactivity reminders
 
+  noOfSoulsTarget        Int?      @default(0)
   addedLeads    Lead[]    @relation("AddedBy")
   assignedLeads Lead[]    @relation("AssignedTo")
   notes         Note[]
@@ -91,6 +93,7 @@ model User {
   announcements Announcement[]
   adminPhones   AdminPhone[]
   auditLogs     AuditLog[]
+  pushSubscriptions PushSubscription[]
 }
 
 model Lead {
@@ -204,4 +207,17 @@ model AuditLog {
   noteContent String?       // Content of note (only for NOTE type)
   details     Json?         // Flexible JSON for additional metadata
   createdAt   DateTime      @default(now())
+}
+
+model PushSubscription {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String    // Push service endpoint URL
+  auth      String    // Authentication secret
+  p256dh    String    // Encryption key
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, endpoint])  // One subscription per device/browser per user
 }

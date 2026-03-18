@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { LeadStatus, SMSType } from "@prisma/client";
 import { z } from "zod";
 import { sendSMS, getSMSTemplate, renderTemplate } from "@/lib/sms";
+import { sendPushToRole, configureWebPush } from "@/lib/push";
 
 const createLeadSchema = z.object({
   fullName: z.string().min(1),
@@ -133,6 +134,27 @@ export async function POST(req: NextRequest) {
     } catch (smsError) {
       console.error("Error sending admin alert SMS:", smsError);
       // Don't fail the request if SMS sending fails
+    }
+
+    // Send push notifications to all admins
+    try {
+      configureWebPush();
+      await sendPushToRole(
+        'ADMIN',
+        {
+          title: 'New Lead Added',
+          body: `${lead.fullName} from ${lead.location} has been added to the system`,
+          tag: `new-lead-${lead.id}`,
+          data: {
+            url: '/dashboard/admin/leads',
+            leadId: lead.id,
+          },
+        },
+        prisma
+      );
+    } catch (pushError) {
+      console.error('Error sending admin alert push notification:', pushError);
+      // Don't fail the request if push sending fails
     }
 
     return NextResponse.json(lead, { status: 201 });

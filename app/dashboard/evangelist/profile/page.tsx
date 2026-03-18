@@ -15,6 +15,7 @@ export default function EvangelistProfilePage() {
     name: "",
     email: "",
     phone: "",
+    noOfSoulsTarget: "",
     gender: ""
   });
 
@@ -39,6 +40,7 @@ export default function EvangelistProfilePage() {
           setForm({
             name: data.user.name || "",
             email: data.user.email || "",
+            noOfSoulsTarget: data.user.noOfSoulsTarget ? String(data.user.noOfSoulsTarget) : "",
             phone: data.user.phone || "",
             gender: data.user.gender || ""
           });
@@ -162,6 +164,22 @@ export default function EvangelistProfilePage() {
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     placeholder="your@email.com"
+                    className="w-full bg-white/10 border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
+                  />
+                </div>
+              </div>
+                {/* No of Souls Target */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+                  No of Souls Target
+                </label>
+                <div className="relative">
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-harvest-400" />
+                  <input
+                    type="number"
+                    value={form.noOfSoulsTarget}
+                    onChange={e => setForm(f => ({ ...f, noOfSoulsTarget: e.target.value }))}
+                    placeholder="Enter your target number of souls"
                     className="w-full bg-white/10 border border-slate-400/20 rounded-xl pl-10 pr-4 py-3 text-slate-600 placeholder:text-harvest-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 text-sm"
                   />
                 </div>

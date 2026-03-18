@@ -17,7 +17,7 @@ const EvangelistTable = ({ evangelists }: { evangelists: any[] }) => {
     setIsModalOpen(false);
     setSelectedUser(null);
   };
-
+// console.log({ evangelists });
   return (
     <>
       {/* Desktop Table View */}

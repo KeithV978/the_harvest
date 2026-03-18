@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { UserRoundPlus, TrendingUp, Users, Activity, CheckCircle } from "lucide-react";
+import { UserRoundPlus, TrendingUp, Users, Activity, CheckCircle, Target } from "lucide-react";
 import LeadTable from "@/components/leads/LeadTable";
 import AnnouncementsBanner from "@/components/AnnouncementsBanner";
 import AddLeadModal from "@/components/leads/AddLeadModal";
@@ -12,9 +12,10 @@ interface Props {
   stats: { total: number; newLeads: number; followingUp: number; converted: number };
   userName: string;
   gender: string | null | undefined;
+  noOfSoulsTarget: number | null | undefined;
 }
 
-export default function EvangelistDashboardClient({ leads: initialLeads, stats, userName, gender }: Props) {
+export default function EvangelistDashboardClient({ leads: initialLeads, stats, userName, gender, noOfSoulsTarget }: Props) {
   const [leads, setLeads] = useState(initialLeads);
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -22,12 +23,14 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
     setLeads(prev => [newLead, ...prev]);
     setShowAddModal(false);
   };
+let targetRemaining = (noOfSoulsTarget - stats.total); 
 
   const statCards = [
-    { label: "My Leads", value: stats.total, icon: Users, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
-    { label: "New Leads", value: stats.newLeads, icon: Activity, color: "bg-orange-50 text-orange-600", border: "border-orange-200" },
-    { label: "Following Up", value: stats.followingUp, icon: TrendingUp, color: "bg-blue-50 text-blue-600", border: "border-blue-200" },
-    { label: "Converted", value: stats.converted, icon: CheckCircle, color: "bg-green-50 text-green-600", border: "border-green-200" },
+    { label: "My Souls Target", value: `${noOfSoulsTarget} (${targetRemaining} Left)`, icon: Target, color: "bg-purple-50 text-purple-600", border: "border-purple-200" },
+    { label: "Total Leads Added", value: stats.total, icon: Users, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
+    { label: "Being Followed Up", value: stats.followingUp, icon: TrendingUp, color: "bg-blue-50 text-blue-600", border: "border-blue-200" },
+    { label: "No Follow Up", value: stats.newLeads, icon: Activity, color: "bg-orange-50 text-orange-600", border: "border-orange-200" },
+    // { label: "Converted", value: stats.converted, icon: CheckCircle, color: "bg-green-50 text-green-600", border: "border-green-200" },
   ];
 
   return (

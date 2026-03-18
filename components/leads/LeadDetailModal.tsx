@@ -116,6 +116,8 @@ export default function LeadDetailModal({
 
   const att = getAttendanceStatus(lead.monthsConsistent ?? 0);
 
+  console.log({"phone": lead})
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-fadeIn">
@@ -180,13 +182,16 @@ export default function LeadDetailModal({
                   { label: "Phone", value: lead.phone || "—" },
                   { label: "Location", value: lead.location },
                   { label: "Address", value: lead.address || "—" },
-                  { label: "Added By", value: lead.addedBy?.name || "—" },
-                  { label: "Assigned To", value: lead.assignedTo?.name || "Unassigned" },
+                  { label: "Added By", value: lead.addedBy?.name || "—", phone: lead.addedBy?.phone },
+                  { label: "Assigned To", value: lead.assignedTo?.name || "Unassigned", phone: lead.assignedTo?.phone },
                   { label: "Added On", value: format(new Date(lead.createdAt), "MMM d, yyyy") },
                 ].map(item => (
                   <div key={item.label}>
                     <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">{item.label}</div>
                     <div className="text-sm text-slate-700 mt-0.5 font-medium">{item.value}</div>
+                    {item?.phone && (
+                      <div className="text-xs text-slate-500 mt-1">Phone: {item.phone}</div>
+                    )}
                   </div>
                 ))}
 

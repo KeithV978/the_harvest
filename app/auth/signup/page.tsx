@@ -13,6 +13,7 @@ import {
   HeartHandshake,
   Phone,
   Users,
+  Target,
   Wheat,
 } from "lucide-react";
 
@@ -24,6 +25,7 @@ export default function SignupPage() {
     password: "",
     gender: "",
     phone: "",
+    noOfSoulsTarget: "",
     role: "EVANGELIST",
   });
   const [error, setError] = useState("");
@@ -149,6 +151,25 @@ export default function SignupPage() {
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+                No. of Souls Target
+              </label>
+              <div className="relative">
+                <Target className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-earth-500" />
+                <input
+                  type="number"
+                  required
+                  value={form.noOfSoulsTarget}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, noOfSoulsTarget: e.target.value }))
+                  }
+                  placeholder="e.g., 100"
+                  className="w-full bg-earth-50/20 border border-earth-100 rounded-xl pl-10 pr-4 py-3 text-slate-500 placeholder:text-earth-400 focus:outline-none focus:ring-2 focus:ring-earth-400 text-sm"
+                />
+              </div>
+            </div>  
+
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
                 Gender
               </label>
               <div className="relative">
@@ -173,6 +194,7 @@ export default function SignupPage() {
                 </select>
               </div>
             </div>
+
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">

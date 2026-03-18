@@ -52,11 +52,11 @@ body {
 }
 
 .harvest-input {
-  @apply w-full min-w-[50%] rounded-xl border border-harvest-200 bg-white hover:bg-white px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
+  @apply w-full min-w-[50%] rounded-xl border border-slate-200 bg-white hover:bg-white px-4 py-2.5 text-sm text-slate-500 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-harvest-400 focus:border-transparent transition-all;
 }
 
 .harvest-label {
-  @apply block text-xs font-semibold uppercase tracking-wider text-harvest-600 mb-1.5;
+  @apply block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1.5;
 }
 
 .harvest-select {
@@ -81,7 +81,7 @@ body {
   @apply w-full text-sm;
 }
 .harvest-table thead {
-  @apply bg-harvest-50;
+  @apply bg-harvest-200;
 }
 .harvest-table th {
   @apply text-left px-4 py-3 text-xs font-semibold uppercase tracking-wider text-slate-600;

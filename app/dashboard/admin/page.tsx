@@ -246,7 +246,7 @@ export default function AdminDashboardPage() {
 
             {/* KPI Cards 2*/}
             <div className=" w-full bg-black/5 p-4 rounded-xl">
-              <p className="font-[600]">Church Membership Temperature</p>
+              <p className="font-[600]">Church Attendance Temperature</p>
               <div className="flex w-full gap-4 mt-2">
                 {[
                   {

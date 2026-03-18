@@ -11,6 +11,7 @@ const signupSchema = z.object({
   password: z.string().min(6),
   phone: z.string().optional(),
   gender: z.enum(["MALE", "FEMALE"]),
+  noOfSoulsTarget: z.string().optional(),
   role: z.enum(["EVANGELIST", "FOLLOWUP"]),
 });
 
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest) {
         name: data.name,
         email: data.email,
         password: hashed,
+        noOfSoulsTarget: parseInt(data.noOfSoulsTarget) || 0,
         gender: data.gender,
         phone: data.phone || null,
         role: data.role as Role,

@@ -46,6 +46,7 @@ export default async function EvangelistDashboardPage() {
     where: { id: user.id },
     select: {
       gender: true,
+      noOfSoulsTarget: true
     },
   });
 
@@ -56,5 +57,5 @@ export default async function EvangelistDashboardPage() {
     converted: convertedCount,
   };
 
-  return <EvangelistDashboardClient leads={JSON.parse(JSON.stringify(leads))} stats={stats} userName={user.name} gender={usr?.gender} />;
+  return <EvangelistDashboardClient leads={JSON.parse(JSON.stringify(leads))} stats={stats} userName={user.name} gender={usr?.gender} noOfSoulsTarget={usr?.noOfSoulsTarget} />;
 }

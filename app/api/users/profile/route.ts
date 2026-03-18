@@ -7,13 +7,14 @@ const updateProfileSchema = z.object({
   name: z.string().min(1, "Name is required").optional(),
   email: z.string().email("Invalid email address").optional(),
   phone: z.string().optional(),
+  noOfSoulsTarget: z.string().optional(),
   gender: z.enum(["MALE", "FEMALE"]).optional(),
 });
 
 export async function PATCH(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session || !session.user?.email) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -36,14 +37,16 @@ export async function PATCH(request: Request) {
       data: {
         name: data.name || user.name,
         email: data.email || user.email,
+        noOfSoulsTarget: data.noOfSoulsTarget ? parseInt(data.noOfSoulsTarget) : user.noOfSoulsTarget,
         phone: data.phone || user.phone,
-        gender: data.gender || user.gender
+        gender: data.gender || user.gender,
       },
       select: {
         id: true,
         name: true,
         email: true,
         phone: true,
+        noOfSoulsTarget: true,
         gender: true,
         role: true,
         createdAt: true,
@@ -58,14 +61,14 @@ export async function PATCH(request: Request) {
     if (error instanceof z.ZodError) {
       return Response.json(
         { error: "Invalid request data", details: error.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     console.error("Profile update error:", error);
     return Response.json(
       { error: "Failed to update profile" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -73,7 +76,7 @@ export async function PATCH(request: Request) {
 export async function GET(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    
+
     if (!session || !session.user?.email) {
       return Response.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -85,6 +88,7 @@ export async function GET(request: Request) {
         name: true,
         email: true,
         phone: true,
+        noOfSoulsTarget: true,
         gender: true,
         role: true,
         createdAt: true,
@@ -98,9 +102,6 @@ export async function GET(request: Request) {
     return Response.json({ user });
   } catch (error) {
     console.error("Profile fetch error:", error);
-    return Response.json(
-      { error: "Failed to fetch profile" },
-      { status: 500 }
-    );
+    return Response.json({ error: "Failed to fetch profile" }, { status: 500 });
   }
 }

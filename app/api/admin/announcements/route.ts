@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { sendPushToRole, configureWebPush } from "@/lib/push";
 
 const createAnnouncementSchema = z.object({
   title: z.string().min(1).max(200),
@@ -100,6 +101,38 @@ export async function POST(req: NextRequest) {
         },
       },
     });
+
+    // Send push notifications to target roles
+    try {
+      const pushRoles: Array<'EVANGELIST' | 'FOLLOWUP' | 'ADMIN'> = [];
+      
+      if (data.targetRole === 'ALL') {
+        pushRoles.push('EVANGELIST', 'FOLLOWUP', 'ADMIN');
+      } else {
+        pushRoles.push(data.targetRole as 'EVANGELIST' | 'FOLLOWUP');
+      }
+
+      configureWebPush();
+
+      for (const role of pushRoles) {
+        await sendPushToRole(
+          role,
+          {
+            title: `New Announcement: ${data.title}`,
+            body: data.content.substring(0, 100) + (data.content.length > 100 ? '...' : ''),
+            tag: `announcement-${announcement.id}`,
+            data: {
+              url: '/dashboard',
+              announcementId: announcement.id,
+            },
+          },
+          prisma
+        );
+      }
+    } catch (pushError) {
+      console.error('Error sending push notifications:', pushError);
+      // Don't fail the announcement creation if push fails
+    }
 
     return NextResponse.json(announcement, { status: 201 });
   } catch (error) {
