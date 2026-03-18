@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // GET /api/push/public-key
 // Return the VAPID public key for client-side subscription
 

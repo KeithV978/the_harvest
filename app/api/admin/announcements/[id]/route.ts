@@ -165,3 +165,7 @@ export async function DELETE(
     );
   }
 }
+
+export async function generateStaticParams() {
+  return [];
+}

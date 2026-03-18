@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // app/api/auth/signup/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -31,7 +35,7 @@ export async function POST(req: NextRequest) {
         name: data.name,
         email: data.email,
         password: hashed,
-        noOfSoulsTarget: parseInt(data.noOfSoulsTarget) || 0,
+        noOfSoulsTarget: parseInt(data.noOfSoulsTarget || "0") || 0,
         gender: data.gender,
         phone: data.phone || null,
         role: data.role as Role,

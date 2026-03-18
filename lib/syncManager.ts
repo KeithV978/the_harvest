@@ -3,7 +3,6 @@
  * Handles syncing offline leads to the server when connection is restored
  */
 
-import { Network } from '@capacitor/network';
 import {
   getPendingLeads,
   updateLeadSyncStatus,
@@ -27,7 +26,6 @@ let currentSyncStatus: SyncStatus = {
   isSyncing: false,
   pendingCount: 0,
 };
-let networkUnsubscribe: (() => void) | null = null;
 
 /**
  * Initialize sync manager and network monitoring
@@ -42,18 +40,6 @@ export async function initializeSyncManager(): Promise<void> {
     // Listen for online events
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
-
-    // For Capacitor, listen to network status changes
-    if (typeof Network !== 'undefined' && Network.addListener) {
-      networkUnsubscribe = await Network.addListener('networkStatusChange', (status) => {
-        currentSyncStatus.isOnline = status.connected;
-        notifyStatusChange();
-
-        if (status.connected) {
-          syncOfflineLeads();
-        }
-      });
-    }
 
     // Initial sync if online
     if (navigator.onLine) {
@@ -70,9 +56,6 @@ export async function initializeSyncManager(): Promise<void> {
 export function cleanupSyncManager(): void {
   window.removeEventListener('online', handleOnline);
   window.removeEventListener('offline', handleOffline);
-  if (networkUnsubscribe) {
-    networkUnsubscribe();
-  }
 }
 
 /**

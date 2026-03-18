@@ -128,3 +128,7 @@ export async function PATCH(
     );
   }
 }
+
+export async function generateStaticParams() {
+  return [];
+}

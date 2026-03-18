@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // app/api/auth/forgot-password/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";

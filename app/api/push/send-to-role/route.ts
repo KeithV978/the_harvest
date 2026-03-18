@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // POST /api/push/send-to-role
 // Send push notifications to all users with a specific role
 // This is used for announcements and system-wide notifications

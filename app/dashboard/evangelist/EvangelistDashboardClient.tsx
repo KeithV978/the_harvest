@@ -23,10 +23,10 @@ export default function EvangelistDashboardClient({ leads: initialLeads, stats, 
     setLeads(prev => [newLead, ...prev]);
     setShowAddModal(false);
   };
-let targetRemaining = (noOfSoulsTarget - stats.total); 
+  const targetRemaining = (noOfSoulsTarget ?? 0) - stats.total;
 
   const statCards = [
-    { label: "My Souls Target", value: `${noOfSoulsTarget} (${targetRemaining} Left)`, icon: Target, color: "bg-purple-50 text-purple-600", border: "border-purple-200" },
+    { label: "My Souls Target", value: `${noOfSoulsTarget ?? 0} (${targetRemaining} Left)`, icon: Target, color: "bg-purple-50 text-purple-600", border: "border-purple-200" },
     { label: "Total Leads Added", value: stats.total, icon: Users, color: "bg-harvest-50 text-harvest-600", border: "border-harvest-200" },
     { label: "Being Followed Up", value: stats.followingUp, icon: TrendingUp, color: "bg-blue-50 text-blue-600", border: "border-blue-200" },
     { label: "No Follow Up", value: stats.newLeads, icon: Activity, color: "bg-orange-50 text-orange-600", border: "border-orange-200" },

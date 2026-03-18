@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // app/api/tasks/send-lead-sms/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";

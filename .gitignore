@@ -42,15 +42,3 @@ next-env.d.ts
 
 /lib/generated/prisma
 .env*.local
-# Capacitor
-/android/app/build
-/android/.gradle
-/android/local.properties
-/android/*/build/
-KeyStore.jks
-*.jks
-*.keystore
-
-# Capacitor build output
-dist/
-capacitor.lock

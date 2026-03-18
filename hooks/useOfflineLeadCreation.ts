@@ -58,7 +58,7 @@ export function useOfflineLeadCreation(options: UseOfflineLeadCreationOptions = 
           additionalNotes: leadData.additionalNotes || '',
           soulState: leadData.soulState || '',
           gender: leadData.gender || '',
-          createdAt: new Date(),
+          createdAt: new Date().toISOString(),
           syncStatus: 'pending',
         };
 

@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // POST /api/push/send
 // Internal endpoint to send push notifications
 // This should only be called from other API routes, not directly from clients

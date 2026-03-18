@@ -1,10 +1,7 @@
 /**
  * Offline Lead Storage Service
- * Handles persistent storage of offline leads using IndexedDB (web) or SQLite (native Capacitor)
+ * Handles persistent storage of offline leads using IndexedDB
  */
-
-import { Capacitor } from '@capacitor/core';
-import { Storage } from '@capacitor/storage';
 
 export interface OfflineLead {
   id: string; // Client-generated UUID
@@ -23,7 +20,6 @@ export interface OfflineLead {
 
 const DB_NAME = 'harvest_offline_db';
 const STORE_NAME = 'offline_leads';
-const CAPACITOR_LEADS_KEY = 'harvest_offline_leads';
 
 let db: IDBDatabase | null = null;
 
@@ -58,38 +54,22 @@ async function getIndexedDB(): Promise<IDBDatabase> {
   return db;
 }
 
-/**
- * Check if running on native platform (Capacitor)
- */
-function isNativePlatform(): boolean {
-  return Capacitor.isNativePlatform();
-}
+
 
 /**
  * Save a lead to offline storage
  */
 export async function saveOfflineLead(lead: OfflineLead): Promise<void> {
   try {
-    if (isNativePlatform()) {
-      // Use Capacitor Storage for native
-      const existingLeads = await getOfflineLeads();
-      const updatedLeads = [...existingLeads, lead];
-      await Storage.set({
-        key: CAPACITOR_LEADS_KEY,
-        value: JSON.stringify(updatedLeads),
-      });
-    } else {
-      // Use IndexedDB for web
-      const database = await getIndexedDB();
-      return new Promise((resolve, reject) => {
-        const transaction = database.transaction([STORE_NAME], 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.add(lead);
+    const database = await getIndexedDB();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction([STORE_NAME], 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.add(lead);
 
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve();
-      });
-    }
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
   } catch (error) {
     console.error('Error saving offline lead:', error);
     throw error;
@@ -101,22 +81,15 @@ export async function saveOfflineLead(lead: OfflineLead): Promise<void> {
  */
 export async function getOfflineLeads(): Promise<OfflineLead[]> {
   try {
-    if (isNativePlatform()) {
-      // Use Capacitor Storage for native
-      const result = await Storage.get({ key: CAPACITOR_LEADS_KEY });
-      return result.value ? JSON.parse(result.value) : [];
-    } else {
-      // Use IndexedDB for web
-      const database = await getIndexedDB();
-      return new Promise((resolve, reject) => {
-        const transaction = database.transaction([STORE_NAME], 'readonly');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.getAll();
+    const database = await getIndexedDB();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction([STORE_NAME], 'readonly');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.getAll();
 
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve(request.result);
-      });
-    }
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result);
+    });
   } catch (error) {
     console.error('Error getting offline leads:', error);
     return [];
@@ -140,40 +113,27 @@ export async function updateLeadSyncStatus(
   error?: string
 ): Promise<void> {
   try {
-    if (isNativePlatform()) {
-      const leads = await getOfflineLeads();
-      const updated = leads.map((lead) =>
-        lead.id === leadId
-          ? { ...lead, syncStatus: status, syncError: error }
-          : lead
-      );
-      await Storage.set({
-        key: CAPACITOR_LEADS_KEY,
-        value: JSON.stringify(updated),
-      });
-    } else {
-      const database = await getIndexedDB();
-      return new Promise((resolve, reject) => {
-        const transaction = database.transaction([STORE_NAME], 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const getRequest = store.get(leadId);
+    const database = await getIndexedDB();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction([STORE_NAME], 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const getRequest = store.get(leadId);
 
-        getRequest.onsuccess = () => {
-          const lead = getRequest.result;
-          if (lead) {
-            lead.syncStatus = status;
-            if (error) lead.syncError = error;
-            const updateRequest = store.put(lead);
-            updateRequest.onerror = () => reject(updateRequest.error);
-            updateRequest.onsuccess = () => resolve();
-          } else {
-            reject(new Error('Lead not found'));
-          }
-        };
+      getRequest.onsuccess = () => {
+        const lead = getRequest.result;
+        if (lead) {
+          lead.syncStatus = status;
+          if (error) lead.syncError = error;
+          const updateRequest = store.put(lead);
+          updateRequest.onerror = () => reject(updateRequest.error);
+          updateRequest.onsuccess = () => resolve();
+        } else {
+          reject(new Error('Lead not found'));
+        }
+      };
 
-        getRequest.onerror = () => reject(getRequest.error);
-      });
-    }
+      getRequest.onerror = () => reject(getRequest.error);
+    });
   } catch (error) {
     console.error('Error updating lead sync status:', error);
     throw error;
@@ -185,24 +145,15 @@ export async function updateLeadSyncStatus(
  */
 export async function deleteOfflineLead(leadId: string): Promise<void> {
   try {
-    if (isNativePlatform()) {
-      const leads = await getOfflineLeads();
-      const filtered = leads.filter((lead) => lead.id !== leadId);
-      await Storage.set({
-        key: CAPACITOR_LEADS_KEY,
-        value: JSON.stringify(filtered),
-      });
-    } else {
-      const database = await getIndexedDB();
-      return new Promise((resolve, reject) => {
-        const transaction = database.transaction([STORE_NAME], 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.delete(leadId);
+    const database = await getIndexedDB();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction([STORE_NAME], 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.delete(leadId);
 
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve();
-      });
-    }
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
   } catch (error) {
     console.error('Error deleting offline lead:', error);
     throw error;
@@ -214,19 +165,15 @@ export async function deleteOfflineLead(leadId: string): Promise<void> {
  */
 export async function clearOfflineLeads(): Promise<void> {
   try {
-    if (isNativePlatform()) {
-      await Storage.remove({ key: CAPACITOR_LEADS_KEY });
-    } else {
-      const database = await getIndexedDB();
-      return new Promise((resolve, reject) => {
-        const transaction = database.transaction([STORE_NAME], 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.clear();
+    const database = await getIndexedDB();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction([STORE_NAME], 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.clear();
 
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve();
-      });
-    }
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
   } catch (error) {
     console.error('Error clearing offline leads:', error);
     throw error;

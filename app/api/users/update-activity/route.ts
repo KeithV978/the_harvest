@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // POST /api/users/update-activity
 // Update the current user's lastActivity timestamp
 // Called by useActivityTracking hook to track user activity

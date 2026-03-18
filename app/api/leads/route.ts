@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // app/api/leads/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";

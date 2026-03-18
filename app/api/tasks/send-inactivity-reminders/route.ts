@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [];
+}
+
 // POST /api/tasks/send-inactivity-reminders
 // Send push notifications to users who have been inactive for 7+ days
 // This endpoint should be called periodically by an external cron service (e.g., EasyCron, Vercel Cron)
