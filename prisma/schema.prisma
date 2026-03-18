@@ -207,7 +207,7 @@ model AuditLog {
   noteContent String?       // Content of note (only for NOTE type)
   details     Json?         // Flexible JSON for additional metadata
   createdAt   DateTime      @default(now())
-}
+} 
 
 model PushSubscription {
   id        String    @id @default(cuid())
