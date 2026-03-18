@@ -1,7 +1,9 @@
 // components/leads/AddLeadModal.tsx
 "use client";
 import { useState } from "react";
-import { CircleX, X, AlertCircle, UserRoundPlus } from "lucide-react";
+import { CircleX, X, AlertCircle, UserRoundPlus, WifiOff } from "lucide-react";
+import { useOfflineLeadCreation } from "@/hooks/useOfflineLeadCreation";
+import { useSyncStatus } from "@/components/SyncProvider";
 
 const AGE_RANGES = [
   { value: "UNDER_18", label: "Under 18" },
@@ -30,6 +32,8 @@ export default function AddLeadModal({
   onClose: () => void;
   onSuccess: (lead: any) => void;
 }) {
+  const { isOnline, createLead } = useOfflineLeadCreation();
+  const { isReady } = useSyncStatus();
   const [form, setForm] = useState({
     fullName: "",
     ageRange: "AGE_18_25",
@@ -48,19 +52,14 @@ export default function AddLeadModal({
     setError("");
     setLoading(true);
 
-    const res = await fetch("/api/leads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-    setLoading(false);
-
-    if (!res.ok) {
-      setError(data.error || "Failed to add lead");
-    } else {
-      onSuccess(data);
+    try {
+      await createLead(form);
+      onSuccess({ ...form, id: `temp_${Date.now()}` });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to add lead";
+      setError(message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,9 +67,17 @@ export default function AddLeadModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm">
       <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-2xl max-h-[90vh] overflow-y-auto animate-fadeIn">
         <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-harvest-50">
-          <h2 className="font-display font-bold text-slate-900 text-lg sm:text-xl">
-            Add New Lead
-          </h2>
+          <div>
+            <h2 className="font-display font-bold text-slate-900 text-lg sm:text-xl">
+              Add New Lead
+            </h2>
+            {!isOnline && isReady && (
+              <div className="flex items-center gap-2 text-xs text-orange-600 mt-1">
+                <WifiOff className="w-3 h-3" />
+                Offline - Will sync when online
+              </div>
+            )}
+          </div>
           <button
             onClick={onClose}
             className="p-2 rounded-xl bg-harvest-500 text-white text-slate-400"
